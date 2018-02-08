@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
   <title>Schoodle</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- External CSS-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
   <link rel="stylesheet" href="styles/layout.css">
-
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/nav.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+  <!-- jQuery script -->
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <!-- temp jQuery for timepicker feature (create module later) -->
   <script type="text/javascript">
       $(document).ready(function(){
         $('input.timepicker').timepicker({});
@@ -20,6 +23,13 @@
 
 </head>
 <body>
+  <!-- top nav bar -->
+  <nav id="nav-bar">
+    <img class="logo" src="http://www.fillmurray.com/200/200">
+    <span class="header">Schoodle!</span>
+  </nav>
+<main class="container">
+    <h2 class="page-head">Create your event!</h2>
   <div id="event">
     <form method="POST" action="/login" id="eventForm">
       <div class="eventForm">
@@ -34,8 +44,9 @@
         <i class="fa fa-sort-alpha-desc" style="font-size:36px"></i>
         <input type="text" name="description" id="description" placeholder="Add note">
       </div>
-    </form>
+      <button class="create-event">Create</button>
   </div>
+</main>
 
   <div>
     <!-- <input text="text" id="selecttime" class='timepicker'> -->
