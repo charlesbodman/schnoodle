@@ -7,7 +7,12 @@ exports.seed = function(knex, Promise) {
       return Promise.all([
         // Inserts seed entries
         knex('events')
-        .insert({title:'midterm demo party' , description: 'Party goes on after demo. Everyone deserve it.', location: 'Lighthouse Labs', organizer_name: 'Shaun', organizer_email: 'shaunmacp@gmail.com'})
+        .insert({
+          title:'midterm demo party', 
+          description: 'Party goes on after demo. Everyone deserve it.', 
+          location: 'Lighthouse Labs', 
+          organizer_name: 'Shaun', 
+          organizer_email: 'shaunmacp@gmail.com'})
       ]);
     });
 };
@@ -19,10 +24,18 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       return Promise.all([
         // Inserts seed entries
-        knex('attendees').insert({name: 'Prerana', email: 'prerana.sh@gmail.com'}),
-        knex('attendees').insert({name: 'Sudip', email: 'sudip.sh@gmail.com'}),
-        knex('attendees').insert({name: 'Dercilio', email: 'dercilioafontes@gmail.com'}),
-        knex('attendees').insert({name: 'Shay', email: 'shaytopazehair@gmail.com'}),
+        knex('attendees').insert({
+          name: 'Prerana', 
+          email: 'prerana.sh@gmail.com'}),
+        knex('attendees').insert({
+          name: 'Sudip', 
+          email: 'sudip.sh@gmail.com'}),
+        knex('attendees').insert({
+          name: 'Dercilio', 
+          email: 'dercilioafontes@gmail.com'}),
+        knex('attendees').insert({
+          name: 'Shay', 
+          email: 'shaytopazehair@gmail.com'}),
       ]);
     });
 };
@@ -34,7 +47,11 @@ exports.seed = function(knex, Promise) {
    .then(function () {
      return Promise.all([
        // // Inserts seed entries in slots table
-       knex('slots').insert({date: '2018-02-07', start_time: '17:00:00', end_time: '20:00:00', event_id: (knex.select('id').from('events').where('title', 'midterm demo party'))}),
+       knex('slots').insert({
+         date: '2018-02-07', 
+         start_time: '17:00:00', 
+         end_time: '20:00:00', 
+         event_id: (knex.select('id').from('events').where('title', 'midterm demo party'))}),
      ]);
    });
 };
@@ -46,10 +63,9 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       return Promise.all([
         knex('attendees_slots')
-        .insert({attendee_id: (knex.select('id').from('attendees').where('name', 'Prerana')), slot_id: (knex.select('id').from('slots').where('date', '2018-02-07')) })
+        .insert({
+          attendee_id: (knex.select('id').from('attendees').where('name', 'Prerana')), 
+          slot_id: (knex.select('id').from('slots').where('date', '2018-02-07')) })
       ]);
     });
 };
-
-
-
