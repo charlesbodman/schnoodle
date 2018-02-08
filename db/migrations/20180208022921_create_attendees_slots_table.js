@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
     table.integer('slot_id').unsigned();
     table.foreign('slot_id').references('slots.id');
   });
-  
+
 };
 
 exports.down = function(knex, Promise) {
