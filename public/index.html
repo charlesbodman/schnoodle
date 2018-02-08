@@ -9,15 +9,35 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <link rel="stylesheet" href="styles/layout.css">
+  <link rel='stylesheet' href='https://fullcalendar.io/js/fullcalendar-3.1.0/fullcalendar.min.css' />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <style>
+  td.down {
+    background-color: red;
+  }
+
+  </style>
   <script type="text/javascript">
+    var dateChosen = [];
       $(document).ready(function(){
-        $('input.timepicker').timepicker({});
+        $('#calendar').fullCalendar({
+          dayClick: function(date, jsEvent, view) {
+            $(this).closest('td').toggleClass('down');
+            let index = dateChosen.indexOf(date.format('YYYY-MM-DD'));
+            if (index > -1) {
+              dateChosen.splice(index, 1);
+            } else {
+              dateChosen.push(date.format('YYYY-MM-DD'));
+            }
+            for(var date of dateChosen){
+              console.log(date);
+            }
+          }
+        });
       });
   </script>
-
 </head>
 <body>
   <div id="event">
@@ -43,7 +63,19 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <!-- calender starts here -->
+    <div id='calendar'></div>
+
+
+
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js">
+
+</script> -->
+<script src='https://fullcalendar.io/js/fullcalendar-3.1.0/lib/moment.min.js'></script>
+<script src='https://fullcalendar.io/js/fullcalendar-3.1.0/lib/jquery.min.js'></script>
+<script src='https://fullcalendar.io/js/fullcalendar-3.1.0/lib/jquery-ui.min.js'></script>
+<script src='https://fullcalendar.io/js/fullcalendar-3.1.0/fullcalendar.min.js'></script>
 
 </body>
 </html>
