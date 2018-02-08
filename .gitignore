@@ -3,3 +3,5 @@ public/styles
 .env
 *.log
 *.sqlite3
+db/seeds/a_slots.js
+db/seeds/events.js
