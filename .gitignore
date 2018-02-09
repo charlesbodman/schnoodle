@@ -5,3 +5,4 @@ public/styles
 *.sqlite3
 db/seeds/a_slots.js
 db/seeds/events.js
+.DS_Store
