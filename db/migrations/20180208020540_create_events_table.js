@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
     table.string('location');
     table.string('organizer_name');
     table.string('organizer_email');
+    table.string('url');
   });
   
 };

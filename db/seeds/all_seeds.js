@@ -12,7 +12,8 @@ exports.seed = function(knex, Promise) {
           description: 'Party goes on after demo. Everyone deserve it.', 
           location: 'Lighthouse Labs', 
           organizer_name: 'Shaun', 
-          organizer_email: 'shaunmacp@gmail.com'})
+          organizer_email: 'shaunmacp@gmail.com', 
+          url: '/events/abcde'})
       ]);
     });
 };
