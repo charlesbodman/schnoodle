@@ -4,7 +4,7 @@ $(document).ready(function(e){
    $('#copy').on('click', (event)=>{
       $('#randomUrl').select();
       document.execCommand("copy");
-      $("#copy").text("Copied to clipboard").show();
+      $("#copy").text("Copied to clipboard").show()hj;
    })
 });
 

@@ -24,15 +24,15 @@ $(document).ready(function(e){
     }
   });
 
-const date = require('date-time-picker')
-const url =req
-$(() => {
-  $.ajax({
-    method: "POST",
-    url: "/events"
-  }).done(() => {
-    }
-  });;
-});
+// const date = require('date-time-picker')
+// const url =req
+// $(() => {
+//   $.ajax({
+//     method: "POST",
+//     url: "/events"
+//   }).done(() => {
+//     }
+//   });;
+// });
 
 });
