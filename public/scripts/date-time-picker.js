@@ -13,14 +13,11 @@ $(document).ready(function() {
       } else {
         dateChosen.push(date.format('YYYY-MM-DD'));
       }
-      for(var date of dateChosen){
-        
-        ///////////////////////
-        // REMEMBER TO REMOVE //
-        console.log(date);
-        ////////////////////////
-      }
     }
   });
+
+   // $('#chooseTime').on('click', event => {
+      // $('#scrollDefaultExample').timepicker({ 'scrollDefault': 'now' });
+   // });
 
 });
