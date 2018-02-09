@@ -43,6 +43,10 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.post("/events",(req, res) =>{
+  knex('events').insert({title: req.body.title, description: req.body.description, location: req.body.location, organizer_name: req.body.userName, orgainzer_email: req.body.email, url: "http://schoodle.com/kjfdkjsljf"});
+})
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });

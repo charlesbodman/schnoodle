@@ -1,4 +1,5 @@
 $(document).ready(function(e){
+  $('#chooseDateTime').addClass('hidden');
   const dateChosen = [];
   $('#calendar').fullCalendar({
     dayClick: function(date, jsEvent, view) {

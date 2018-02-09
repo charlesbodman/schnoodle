@@ -89,7 +89,7 @@
 <main class="container">
     <h2 class="page-head">Create your event!</h2>
   <div id="event">
-    <form method="POST" action="/login" id="eventForm">
+    <form method="POST" action="/events" id="eventForm">
       <div class="eventForm">
         <i class="fa fa-user" style="font-size:36px"></i>
         <input text="text" name="userName" id="userName" placeholder="Enter name">
@@ -102,11 +102,11 @@
         <i class="fa fa-sort-alpha-desc" style="font-size:36px"></i>
         <input type="text" name="description" id="description" placeholder="Add note">
       </div>
-     <!--  <button class="create-event">Create</button> -->
+      <button class="create-event">Create Event</button>
   </div>
 </main>
 
-
+</form>
 <section id="chooseDateTime">
 
     <!-- calender starts here -->
@@ -128,7 +128,7 @@
   <input type="button" value="copy" id="copy">
 </section>
 
-
+<input type="submit" name="event">
 
 
 
