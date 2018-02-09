@@ -1,4 +1,3 @@
-
 exports.up = function(knex, Promise) {
   // migrate forward - Creates events_table
   return knex.schema.createTable('events', function (table) {
@@ -10,7 +9,7 @@ exports.up = function(knex, Promise) {
     table.string('organizer_email');
     table.string('url');
   });
-  
+
 };
 
 exports.down = function(knex, Promise) {

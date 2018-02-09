@@ -1,5 +1,4 @@
 $(document).ready(function(e){
-  $('#chooseDateTime').addClass('hidden');
   const dateChosen = [];
   $('#calendar').fullCalendar({
     dayClick: function(date, jsEvent, view) {
@@ -8,24 +7,27 @@ $(document).ready(function(e){
 
       // Remove the date if already chosen (deselect)
       if (index > -1) {
+       console.log($( "h3:contains(date.format('YYYY-MM-DD'))" ).text());
+       // .css( "text-decoration", "underline" );
         dateChosen.splice(index, 1);
+
       } else {
+
         dateChosen.push(date.format('YYYY-MM-DD'));
+        const $timeDiv = $('<div>');
+        const $date = $('<h3>').text(date.format('YYYY-MM-DD'));
+        const $startText = $('<p>').text('Start Time');
+        const $startTime = $('<input>').addClass('startTime').timepicker({});
+        const $endText = $('<p>').text('End Time');
+        const $endTime  = $('<input>').addClass('endTime').timepicker({});
+        const $div = $($timeDiv).append($date, $startText, $startTime, $endText, $endTime);
+        const $time = $('#time').append($div);
+
       }
     }
   });
-
- $('#chooseTime').on('click', event => {
-    event.preventDefault();
-    for(let date of dateChosen) {
-      console.log(date);
-      const $date = $('<p>').text(date);
-      const $startText = $('<p>').text('Start Time');
-      const $startTime = $('<input>').addClass('startTime').timepicker({});
-      const $endText = $('<p>').text('End Time');
-      const $endTime  = $('<input>').addClass('endTime').timepicker({});
-      $('#time').append($date, $startText, $startTime, $endText, $endTime);
-    }
-
- });
 });
+//pick the date
+//check if the date is in slot
+//yes delete from the slot
+//else add in the slot

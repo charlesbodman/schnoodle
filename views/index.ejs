@@ -22,7 +22,7 @@
 
 
   <style>
-    section#chooseDateTime{
+    #chooseDateTime{
       z-index: -1;
       box-shadow: 5px 10px 18px #888888;
       margin-top: 20px;
@@ -86,11 +86,13 @@
     <img class="logo" src="http://www.fillmurray.com/200/200">
     <span class="header">Schoodle!</span>
   </nav>
+
 <main class="container">
-    <h2 class="page-head">Create your event!</h2>
-  <div id="event">
-    <form method="POST" action="/events" id="eventForm">
-      <div class="eventForm">
+  <h2 class="page-head">Create your event!</h2>
+
+  <form method="POST" action="/events" id="eventForm">
+    <div id="event">
+      <fieldset class="eventForm">
         <i class="fa fa-user" style="font-size:36px"></i>
         <input text="text" name="userName" id="userName" placeholder="Enter name">
         <i class="material-icons" style="font-size:36px">email</i>
@@ -101,37 +103,35 @@
         <input text="text" name="location" id="location" placeholder="Add location">
         <i class="fa fa-sort-alpha-desc" style="font-size:36px"></i>
         <input type="text" name="description" id="description" placeholder="Add note">
-      </div>
-      <button class="create-event">Create Event</button>
+      </fieldset>
+      <!-- <button class="create-event">Create Event</button> -->
+    </div>
+
+    <div id="chooseDateTime">
+
+      <!-- calender starts here -->
+     <fieldset id='calendar'></fieldset>
+
+      <!-- time starts here -->
+      <fieldset id="time"></fieldset>
+
+    </div>
+
+  <!-- RandomUrl for attendee -->
+    <div id="randomURL">
+      <fieldset id="generateRandomUrl">
+        <h1> Invite participants via ........</h1>
+        <p>Everyone with the link can vote-no account requird</p>
+        <input type="text" id="randomUrl" readonly>
+        <input type="button" value="copy" id="copy">
+      </fieldset>
   </div>
+
+    <input type="submit" name="event">
+
+  </form>
+
 </main>
-
-</form>
-<section id="chooseDateTime">
-
-    <!-- calender starts here -->
-   <div id='calendar'></div>
-
-    <!-- time starts here -->
-  <div id="time">
-    <button id="chooseTime">Add time </button>
-   </div>
-
-</section>
-
-<!-- RandomUrl for attendee -->
-
-<section id="generateRandomUrl">
-  <h1> Invite participants via ........</h1>
-  <p>Everyone with the link can vote-no account requird</p>
-  <input type="text" id="randomUrl" readonly>
-  <input type="button" value="copy" id="copy">
-</section>
-
-<input type="submit" name="event">
-
-
-
   <script
     src="http://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
