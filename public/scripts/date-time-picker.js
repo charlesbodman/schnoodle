@@ -15,8 +15,8 @@ $(document).ready(function() {
       }
       for(var date of dateChosen){
         
-        ///////////////////////
-        // REMEMBER TO REMOVE //
+        /////////////////////// Todo
+        // Todo: REMEMBER TO REMOVE //
         console.log(date);
         ////////////////////////
       }

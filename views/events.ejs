@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <%- include partials/head.ejs %>
+
+<body>
+
+  <%- include partials/nav.ejs %>
+
+  <main class="container">
+      <h2 class="page-head">Create your event!</h2>
+    <div id="event">
+      <form method="POST" action="/login" id="eventForm">
+        <div class="eventForm">
+          <i class="fa fa-user" style="font-size:36px"></i>
+          <input text="text" name="userName" id="userName" placeholder="Enter name">
+          <i class="material-icons" style="font-size:36px">email</i>
+          <input text="text" name="email" id="email" placeholder="Enter email" >
+          <i class="material-icons" style="font-size:36px">title</i>
+          <input text="text" name="title" id="title" placeholder="Enter title">
+          <i class="material-icons" style="font-size:36px">room</i>
+          <input text="text" name="location" id="location" placeholder="Add location">
+          <i class="fa fa-sort-alpha-desc" style="font-size:36px"></i>
+          <input type="text" name="description" id="description" placeholder="Add note">
+        </div>
+        <button class="create-event">Create</button>
+    </div>
+  </main>
+
+  <div>
+    <!-- <input text="text" id="selecttime" class='timepicker'> -->
+  </div>
+
+  <%- include partials/scripts.ejs %>
+
+</body>
+</html>
