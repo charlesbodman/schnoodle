@@ -1,6 +1,4 @@
-$(document).ready(function() {
-
-  // Get a array of days in the datepicker
+$(document).ready(function(e){
   const dateChosen = [];
   $('#calendar').fullCalendar({
     dayClick: function(date, jsEvent, view) {
@@ -16,8 +14,17 @@ $(document).ready(function() {
     }
   });
 
-   // $('#chooseTime').on('click', event => {
-      // $('#scrollDefaultExample').timepicker({ 'scrollDefault': 'now' });
-   // });
+ $('#chooseTime').on('click', event => {
+    event.preventDefault();
+    for(let date of dateChosen) {
+      console.log(date);
+      const $date = $('<p>').text(date);
+      const $startText = $('<p>').text('Start Time');
+      const $startTime = $('<input>').addClass('startTime').timepicker({});
+      const $endText = $('<p>').text('End Time');
+      const $endTime  = $('<input>').addClass('endTime').timepicker({});
+      $('#time').append($date, $startText, $startTime, $endText, $endTime);
+    }
 
+ });
 });

@@ -6,3 +6,5 @@ public/styles
 db/seeds/a_slots.js
 db/seeds/events.js
 .DS_Store
+public/index.html
+.vscode/
