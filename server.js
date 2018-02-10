@@ -36,7 +36,8 @@ app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
   debug: true,
-  outputStyle: 'expanded'
+  outputStyle: 'expanded',
+  // prefix: '/styles'
 }));
 app.use(express.static("public"));
 
