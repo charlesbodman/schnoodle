@@ -52,7 +52,6 @@ app.post("/events", (req, res) => {
 
   const dataEvent = req.body;
 
-  console.log(dataEvent);
 
   // Inserts event's data into DB
   knex('events').insert({
@@ -86,12 +85,14 @@ app.post("/events", (req, res) => {
 
   var data = {
     from: 'Mail Gun <postmaster@sandbox9190e1faf0154e7ab59d298fdd7a08a5.mailgun.org>',
-    to: 'prerana.sh@gmail.com, sh.sudip@gmail.com, dercilioafontes@gmail.com',
-    subject: 'Invitation from schoodle',
-    text: 'Testing some Mailgun awesomeness!'
+    to: dataEvent.emailAttendees,
+    subject: dataEvent.title,
+    text: dataEvent.description + dataEvent.url
   };
 
   mailgun.messages().send(data, function (error, body) {
+    console.log(data);
+    console.log(error);
     console.log(body);
   });
 
