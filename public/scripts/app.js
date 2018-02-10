@@ -1,40 +1,42 @@
-$(document).ready(function(e) {
+$(document).ready(function() {
 
+  // Makes a randon generated url for a event
   function generateRandomUrl() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < 15; i++)
+    for (var i = 0; i < 15; i++) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
     return "https://events/" + text;
   }
 
-  // console.log(dateChosen);
-  const url = generateRandomUrl();
-   $('#randomUrl').val(url);
-   $('#copy').on('click', (event)=>{
-      $('#randomUrl').select();
-      document.execCommand("copy");
-      $("#copy").text("Copied to clipboard").show();
-   });
+  // Sets the url and aplies it on the create event page
+  const eventURL = generateRandomUrl();
+  $('#randomUrl').val(eventURL);
+  $('#copy').on('click', (event) => {
+    $('#randomUrl').select();
+    document.execCommand("copy");
+    $("#copy").text("Copied to clipboard").show();
+  });
 
+  // Objets to save the date from the form
   const eventData = {};
   const slots = {};
-  // const dateChosen = [];
 
+  // Creates the calendar, picks date(s), start and end times and sets data into slots object.
   $('#calendar').fullCalendar({
-    dayClick: function(date, jsEvent, view) {
-      $(this).closest('td').toggleClass('down');
-      // const index = dateChosen.indexOf(date.format('YYYY-MM-DD'));
-      // slots[date.format('YYYY-MM-DD')] = {};
 
+    dayClick: function(date, jsEvent, view) {
+      
+      $(this).closest('td').toggleClass('down');
       if (slots[date.format('YYYY-MM-DD')]) {
-          delete slots[date.format('YYYY-MM-DD')];
-          $(`h3:contains(${date.format('YYYY-MM-DD')})`).parent().remove();
+        delete slots[date.format('YYYY-MM-DD')];
+        $(`h3:contains(${date.format('YYYY-MM-DD')})`).parent().remove();
       } else {
         slots[date.format('YYYY-MM-DD')] = {
           startTime: 0,
           endTime: 0
-        }
+        };
         const $timeDiv = $('<div>');
         const $date = $('<h3>').text(date.format('YYYY-MM-DD'));
         const $startText = $('<p>').text('Start Time');
@@ -53,38 +55,35 @@ $(document).ready(function(e) {
         const $time = $('#time').append($div);
 
         eventData.slots = slots;
-        // console.log(eventData);
       }
     }
   });
 
+  // Prevents default behavior of the form event submission and sets the data in a object to post to server using
   $('#eventForm').on('submit', (event) => {
 
     event.preventDefault();
 
-    eventData.organizer_name = $('#userName').val();
-    eventData.organizer_email = $('#email').val();
+    eventData.organizerName = $('#userName').val();
+    eventData.organizerEmail = $('#email').val();
     eventData.title = $('#title').val();
     eventData.location = $('#location').val();
     eventData.description = $('#description').val();
-    eventData.url = url;
+    eventData.url = eventURL;
 
-    console.log(eventData);
     $.ajax({
       method: "POST",
       url: "/events",
       data: eventData,
       success: function(result){
-        console.log("it workds")
+        //////////////////////////
+        // TODO: REMOVE OR CHANGE
+        console.log("it workds");
+        //////////////////////////
       }
 
     });
-
   });
-
-//post to route stats here
-
-
 });
 
 
