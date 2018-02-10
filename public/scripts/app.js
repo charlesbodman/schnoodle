@@ -2,12 +2,12 @@ $(document).ready(function() {
 
   // Makes a randon generated url for a event
   function generateRandomUrl() {
-    var text = "";
+    var urlID = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     for (var i = 0; i < 15; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
+      urlID += possible.charAt(Math.floor(Math.random() * possible.length));
     }
-    return "https://events/" + text;
+    return "http://localhost:8080/events/" + urlID;
   }
 
   // Sets the url and aplies it on the create event page
