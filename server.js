@@ -53,10 +53,10 @@ app.get("/", (req, res) => {
 app.get("/events/:id", (req, res) => {
     const dataEventAndSlots = knex('events').where('url', `http://localhost:8080/events/${req.params.id}`).select('title', 'description', 'location', 'organizer_name', 'organizer_email')
     .then(function(result) {
-      const templateVar = result;
+      const templateVar = result[0];
       console.log(result);
       console.log("success in getting event data from DB!");
-      res.render("events_show", templateVar[0]);
+      res.render("events_show", templateVar);
     } );
 
     // console.log(dataEventAndSlots[0]);
@@ -95,12 +95,12 @@ app.post("/events", (req, res) => {
 
 
   //use mailgun to send email to each attendees
-  var api_key = 'key-5412572ac2cdec379260ee493eec6183';
-  var domain = 'sandbox9190e1faf0154e7ab59d298fdd7a08a5.mailgun.org';
+  var api_key = 'key-499843def5fb98f190f28750ae45e872';
+  var domain = 'sandbox6b1150ae072a4a348d011c2f1ad477c1.mailgun.org';
   var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
   var data = {
-    from: 'Mail Gun <postmaster@sandbox9190e1faf0154e7ab59d298fdd7a08a5.mailgun.org>',
+    from: 'Mail Gun <postmaster@sandbox6b1150ae072a4a348d011c2f1ad477c1.mailgun.org>',
     to: dataEvent.emailAttendees,
     subject: dataEvent.title,
     text: dataEvent.description + dataEvent.url
