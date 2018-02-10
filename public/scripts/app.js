@@ -23,11 +23,12 @@ $(document).ready(function(e) {
 
   $('#calendar').fullCalendar({
     dayClick: function(date, jsEvent, view) {
+      $(this).closest('td.fc-past').toggleClass('down');
       $(this).closest('td').toggleClass('down');
       // const index = dateChosen.indexOf(date.format('YYYY-MM-DD'));
       // slots[date.format('YYYY-MM-DD')] = {};
 
-      if (slots[date.format('YYYY-MM-DD')]) {
+      if (slots[date.format('YYYY-MM-DD')] || $(this).closest('td.fc-past').length) {
           delete slots[date.format('YYYY-MM-DD')];
           $(`h3:contains(${date.format('YYYY-MM-DD')})`).parent().remove();
       } else {
@@ -45,6 +46,7 @@ $(document).ready(function(e) {
         });
         const $endText = $('<p>').text('End Time');
         const $endTime  = $('<input>').addClass('endTime').timepicker({
+          startTime : `${$startTime.val()}`,
           change: function() {
             slots[date.format('YYYY-MM-DD')].endTime = $endTime.val();
           }
@@ -68,6 +70,7 @@ $(document).ready(function(e) {
     eventData.location = $('#location').val();
     eventData.description = $('#description').val();
     eventData.url = url;
+    eventData.emailAttendes = $('#email').val();
 
     console.log(eventData);
     $.ajax({

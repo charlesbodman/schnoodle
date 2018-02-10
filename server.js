@@ -49,9 +49,23 @@ app.get("/", (req, res) => {
 });
 
 app.post("/events",(req, res) =>{
-  console.log(req.body);
-knex('events').insert({title: req.body.title, description: req.body.description, location: req.body.location, organizer_name: req.body.userName, orgainzer_email: req.body.email, url: "http://schoodle.com/kjfdkjsljf"});
-  res.redirect('/');
+  var api_key = 'key-5412572ac2cdec379260ee493eec6183';
+  var domain = 'sandbox9190e1faf0154e7ab59d298fdd7a08a5.mailgun.org';
+  var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+
+  var data = {
+    from: 'Mail Gun <postmaster@sandbox9190e1faf0154e7ab59d298fdd7a08a5.mailgun.org>',
+    to: 'prerana.sh@gmail.com, sh.sudip@gmail.com, dercilioafontes@gmail.com',
+    subject: 'Invitation from schoodle',
+    text: 'Testing some Mailgun awesomeness!'
+  };
+
+  mailgun.messages().send(data, function (error, body) {
+    console.log(body);
+  });
+    console.log(req.body.slots.email);
+  knex('events').insert({title: req.body.title, description: req.body.description, location: req.body.location, organizer_name: req.body.userName, orgainzer_email: req.body.email, url: "http://schoodle.com/kjfdkjsljf"});
+    res.redirect('/');
 })
 
 app.listen(PORT, () => {
