@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
 
 app.post("/events",(req, res) =>{
   console.log(req.body);
-  knex('events').insert({title: req.body.title, description: req.body.description, location: req.body.location, organizer_name: req.body.userName, orgainzer_email: req.body.email, url: "http://schoodle.com/kjfdkjsljf"});
+knex('events').insert({title: req.body.title, description: req.body.description, location: req.body.location, organizer_name: req.body.userName, orgainzer_email: req.body.email, url: "http://schoodle.com/kjfdkjsljf"});
   res.redirect('/');
 })
 
