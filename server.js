@@ -2,17 +2,17 @@
 
 require('dotenv').config();
 
-const PORT        = process.env.PORT || 8080;
-const ENV         = process.env.ENV || "development";
-const express     = require("express");
-const bodyParser  = require("body-parser");
-const sass        = require("node-sass-middleware");
-const app         = express();
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
+const bodyParser = require("body-parser");
+const sass = require("node-sass-middleware");
+const app = express();
 
-const knexConfig  = require("./knexfile");
-const knex        = require("knex")(knexConfig[ENV]);
-const morgan      = require('morgan');
-const knexLogger  = require('knex-logger');
+const knexConfig = require("./knexfile");
+const knex = require("knex")(knexConfig[ENV]);
+const morgan = require('morgan');
+const knexLogger = require('knex-logger');
 const cookieSession = require('cookie-session');
 
 // Seperated Routes for each Resource
@@ -48,7 +48,38 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.post("/events",(req, res) =>{
+app.post("/events", (req, res) => {
+
+  const dataEvent = req.body;
+
+  console.log(dataEvent);
+
+  // Inserts event's data into DB
+  knex('events').insert({
+    title: dataEvent.title,
+    description: dataEvent.description,
+    location: dataEvent.location,
+    organizer_name: dataEvent.organizerName,
+    organizer_email: dataEvent.organizerEmail,
+    url: dataEvent.url
+  }).then( function(result) {
+    console.log("success in insertr event to DB!");
+  });
+
+  // Inserts event's data into DB
+  for (const key in dataEvent.slots) {
+    knex('slots').insert({
+      date: key,
+      start_time: dataEvent.slots[key].startTime,
+      end_time: dataEvent.slots[key].endTime,
+      event_id: (knex.select('id').from('events').where('url', dataEvent.url))
+    }).then(function(result) {
+      console.log("success in interting slot!");
+    });
+  }
+
+
+  //use mailgun to send email to each attendees
   var api_key = 'key-5412572ac2cdec379260ee493eec6183';
   var domain = 'sandbox9190e1faf0154e7ab59d298fdd7a08a5.mailgun.org';
   var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
@@ -63,10 +94,11 @@ app.post("/events",(req, res) =>{
   mailgun.messages().send(data, function (error, body) {
     console.log(body);
   });
-    console.log(req.body.slots.email);
-  knex('events').insert({title: req.body.title, description: req.body.description, location: req.body.location, organizer_name: req.body.userName, orgainzer_email: req.body.email, url: "http://schoodle.com/kjfdkjsljf"});
-    res.redirect('/');
-})
+
+
+
+  res.redirect('/');
+});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

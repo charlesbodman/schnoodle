@@ -1,27 +1,31 @@
-$(document).ready(function(e) {
+$(document).ready(function() {
 
+  // Makes a randon generated url for a event
   function generateRandomUrl() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < 15; i++)
+    for (var i = 0; i < 15; i++) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
     return "https://events/" + text;
   }
 
-  // console.log(dateChosen);
-  const url = generateRandomUrl();
-   $('#randomUrl').val(url);
-   $('#copy').on('click', (event)=>{
-      $('#randomUrl').select();
-      document.execCommand("copy");
-      $("#copy").text("Copied to clipboard").show();
-   });
+  // Sets the url and aplies it on the create event page
+  const eventURL = generateRandomUrl();
+  $('#randomUrl').val(eventURL);
+  $('#copy').on('click', (event) => {
+    $('#randomUrl').select();
+    document.execCommand("copy");
+    $("#copy").text("Copied to clipboard").show();
+  });
 
+  // Objets to save the date from the form
   const eventData = {};
   const slots = {};
-  // const dateChosen = [];
 
+  // Creates the calendar, picks date(s), start and end times and sets data into slots object.
   $('#calendar').fullCalendar({
+
     dayClick: function(date, jsEvent, view) {
       $(this).closest('td.fc-past').toggleClass('down');
       $(this).closest('td').toggleClass('down');
@@ -35,7 +39,7 @@ $(document).ready(function(e) {
         slots[date.format('YYYY-MM-DD')] = {
           startTime: 0,
           endTime: 0
-        }
+        };
         const $timeDiv = $('<div>');
         const $date = $('<h3>').text(date.format('YYYY-MM-DD'));
         const $startText = $('<p>').text('Start Time');
@@ -45,8 +49,9 @@ $(document).ready(function(e) {
           }
         });
         const $endText = $('<p>').text('End Time');
+        console.log($startTime.val());
         const $endTime  = $('<input>').addClass('endTime').timepicker({
-          startTime : `${$startTime.val()}`,
+          startTime : `${slots[date.format('YYYY-MM-DD')].startTime}`,
           change: function() {
             slots[date.format('YYYY-MM-DD')].endTime = $endTime.val();
           }
@@ -55,39 +60,37 @@ $(document).ready(function(e) {
         const $time = $('#time').append($div);
 
         eventData.slots = slots;
-        // console.log(eventData);
       }
     }
   });
 
+  // Prevents default behavior of the form event submission and sets the data in a object to post to server using
   $('#eventForm').on('submit', (event) => {
 
     event.preventDefault();
 
-    eventData.organizer_name = $('#userName').val();
-    eventData.organizer_email = $('#email').val();
+    eventData.organizerName = $('#userName').val();
+    eventData.organizerEmail = $('#email').val();
     eventData.title = $('#title').val();
     eventData.location = $('#location').val();
     eventData.description = $('#description').val();
-    eventData.url = url;
-    eventData.emailAttendes = $('#email').val();
 
-    console.log(eventData);
+    eventData.url = eventURL;
+    eventData.emailAttendees = $('#email').val();
+
     $.ajax({
       method: "POST",
       url: "/events",
       data: eventData,
       success: function(result){
-        console.log("it workds")
+        //////////////////////////
+        // TODO: REMOVE OR CHANGE
+        console.log("it workds");
+        //////////////////////////
       }
 
     });
-
   });
-
-//post to route stats here
-
-
 });
 
 
