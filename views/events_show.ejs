@@ -47,9 +47,9 @@
 <table id= "slots">
   <tr>
     <th><h3>Name</h3></th>
-    <th> <%= slots.date%><br><%= slots.start_time + "/" +slots.end_time %></th>
-    <th> <%= slots.date %><br><%= slots.start_time + "/" +slots.end_time %></th>
-    <th> <%= slots.date %><br><%= slots.start_time + "/" +slots.end_time %></th>
+    <% for (let slot of slots) { %>
+      <th> <%= slot.date %><br><%= slot.start_time + "/" +slot.end_time %></th>
+    <% } %>
   </tr>
 
 
