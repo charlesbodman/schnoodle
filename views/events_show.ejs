@@ -42,12 +42,11 @@
     <h2><%= organizer_name %></h2>
     <h3><%= organizer_email %><h3></h3>
   </header>
-<<<<<<< HEAD:views/dercilio_events_show.ejs
 
   <!-- Open container -->
-  <div class="container">
-    <table>    
-    <% Object.keys(slots).forEach( function (key) { %> 
+  <!-- <div class="container">
+    <table>
+    <% Object.keys(slots).forEach( function (key) { %>
       <thead>
         <tr>
           <th><%= moment(slots[key].date).format('YYYY-MM-DD') %> (<%= slots[key].start_time %> - <%= slots[key].end_time %>)</th>
@@ -55,20 +54,18 @@
       </thead>
     <% }) %>
       <tbody>
-          
+
       </tbody>
   </table>
-</div> 
+</div -->>
 <!-- Close container -->
-=======
->>>>>>> 6dd995955b6b9115dc1ef8ad8af4ef227c25e289:views/events_show.ejs
 
 
 <table id= "slots">
   <tr>
     <th><h3>Name</h3></th>
     <% for (let slot of slots) { %>
-      <th> <%= slot.date %><br><%= slot.start_time + "/" +slot.end_time %></th>
+      <th> <%= moment(slot.date).format('YYYY-MM-DD') %><br><%= slot.start_time.split(5, 0) + "/" +slot.end_time %></th>
     <% } %>
   </tr>
 
