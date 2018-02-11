@@ -45,7 +45,7 @@ $(document).ready(function() {
       data: attenndeeData,
       success: function(result){
       }
->>>>>>> e3df610947a46ace777fa574f8dd76d232cc7832
+
 
     });
   });
