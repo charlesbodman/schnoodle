@@ -40,8 +40,8 @@ $(document).ready(function() {
           startTime: 0,
           endTime: 0
         };
-        const $timeDiv = $('<div>');
-        const $date = $('<h3>').text(date.format('YYYY-MM-DD'));
+        const $timeDiv = $('<div>').addClass('time-div');
+        const $date = $('<h3>').addClass('date').text(date.format('YYYY-MM-DD'));
         const $startText = $('<p>').text('Start Time');
         const $startTime = $('<input>').addClass('startTime').timepicker({
           change: function() {
