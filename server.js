@@ -58,22 +58,18 @@ app.get("/", (req, res) => {
 // Home page
 app.get("/events/:id", (req, res) => {
 
-  const dataEvent = knex('events')
-    .where('url', `http://localhost:8080/events/${req.params.id}`)
-    .select('title', 'description', 'location', 'organizer_name', 'organizer_email')
-    .then(function(result) {
+  const dataEvent = knex('events').where('url', `http://localhost:8080/events/${req.params.id}`).select('title', 'description', 'location', 'organizer_name', 'organizer_email').then(function(result) {
       const templateVar = result[0];
       console.log("success in getting event (without slots) data from DB!");
 
       templateVar.slots = [];
-       knex('slots')
-        .where('event_id', (knex.select('id')
-          .from('events')
-          .where('url', `http://localhost:8080/events/${req.params.id}`))).select()
-        .then(function(rows) {
+       knex('slots').where('event_id', (knex.select('id').from('events').where('url', `http://localhost:8080/events/${req.params.id}`))).select().then( function(rows) {
           templateVar.slots = rows;
-          templateVar.moment = moment;
+          ////// REMEMBER TO REMOVE THIS IN THE END ///////
+          // templateVar.moment = moment; ////////////////////
+          console.log(rows);
           console.log("success in getting slots data from DB!");
+
           res.render("events_show", templateVar);
         });
     });
@@ -139,7 +135,7 @@ app.post("/events/attendee-slots", (req, res) => {
   const dataAttenndee = req.body;
 
   ///// REMEMBER TO REMOVE THIS IN THE END /////
-  console.log(dataAttenndee); /////////
+  console.log(dataAttenndee); /////////////////
 
   knex('attendees').insert({
     name: dataAttenndee.name,

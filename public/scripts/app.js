@@ -40,16 +40,16 @@ $(document).ready(function() {
           startTime: 0,
           endTime: 0
         };
-        const $timeDiv = $('<div>');
-        const $date = $('<h3>').text(date.format('YYYY-MM-DD'));
-        const $startText = $('<p>').text('Start Time');
-        const $startTime = $('<input>').addClass('startTime').timepicker({
+        const $timeDiv = $('<div>').addClass('time-div');
+        const $date = $('<h3>').addClass('date').text(date.format('YYYY-MM-DD'));
+        const $startText = $('<p>').addClass('start-text').text('Start Time');
+        const $startTime = $('<input>').addClass('startTime form-control').timepicker({
           change: function() {
             slots[date.format('YYYY-MM-DD')].startTime = $startTime.val();
           }
         });
-        const $endText = $('<p>').text('End Time');
-        const $endTime  = $('<input>').addClass('endTime').timepicker({
+        const $endText = $('<p>').addClass('end-text').text('End Time');
+        const $endTime  = $('<input>').addClass('endTime form-control').timepicker({
           startTime: `${slots[date.format('YYYY-MM-DD')].startTime}`,
           change: function() {
             slots[date.format('YYYY-MM-DD')].endTime = $endTime.val();
