@@ -51,17 +51,20 @@ app.get("/", (req, res) => {
 
 // Home page
 app.get("/events/:id", (req, res) => {
-    const dataEventAndSlots = knex('events').where('url', `http://localhost:8080/events/${req.params.id}`).select('title', 'description', 'location', 'organizer_name', 'organizer_email')
-    .then(function(result) {
+
+  const dataEvent = knex('events').where('url', `http://localhost:8080/events/${req.params.id}`).select('title', 'description', 'location', 'organizer_name', 'organizer_email').then(function(result) {
       const templateVar = result[0];
-      console.log(result);
-      console.log("success in getting event data from DB!");
-      res.render("events_show", templateVar);
-    } );
+      console.log("success in getting event (without slots) data from DB!");
 
-    // console.log(dataEventAndSlots[0]);
 
-  // res.render("events_show", dataEventAndSlots[0]);
+      const dataSlotsOfEvent = knex('slots').where('event_id', (knex.select('id').from('events').where('url', `http://localhost:8080/events/${req.params.id}`))).select().then(function(result) {
+        templateVar.slots = result[0];
+        console.log("success in getting slots data from DB!");
+        console.log(templateVar);
+        res.render("events_show", templateVar);
+
+      })
+  });
 });
 
 app.post("/events", (req, res) => {
@@ -103,7 +106,7 @@ app.post("/events", (req, res) => {
     from: 'Mail Gun <postmaster@sandbox6b1150ae072a4a348d011c2f1ad477c1.mailgun.org>',
     to: dataEvent.emailAttendees,
     subject: dataEvent.title,
-    text: dataEvent.description + dataEvent.url
+    text: `Hey there! \n ${dataEvent.organizer_name} has invited you to an event they just created called ${dataEvent.description}! Please follow the link below to vote on your preferred times. \n ${dataEvent.url}`
   };
 
   mailgun.messages().send(data, function (error, body) {
