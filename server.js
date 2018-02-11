@@ -70,6 +70,7 @@ app.get("/events/:id", (req, res) => {
           console.log(rows);
           console.log("success in getting slots data from DB!");
 
+          knex()
           res.render("events_show", templateVar);
         });
     });
