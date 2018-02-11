@@ -18,6 +18,7 @@ $(document).ready(function() {
   }
   $('#slots').append($tr);
 
+
   $('td').change(function(event) {
 
     const idChosen = $(this).parents('table').find('tr:first-child').children('th:nth-child(' + (this.cellIndex + 2) + ')').attr('id');
@@ -44,6 +45,7 @@ $(document).ready(function() {
       data: attenndeeData,
       success: function(result){
       }
+
 
     });
   });
