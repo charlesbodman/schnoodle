@@ -21,6 +21,7 @@ const apiKey = 'key-5412572ac2cdec379260ee493eec6183';
 const domain = 'sandbox9190e1faf0154e7ab59d298fdd7a08a5.mailgun.org';
 const mailgun = require('mailgun-js')({apiKey: apiKey, domain: domain});
 
+
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 
@@ -64,7 +65,10 @@ app.get("/events/:id", (req, res) => {
     .then(function(result) {
       const templateVar = result[0];
       console.log("success in getting event (without slots) data from DB!");
-      const dataSlotsOfEvent = knex('slots')
+
+
+      templateVar.slots = [];
+       knex('slots')
         .where('event_id', (knex.select('id')
           .from('events')
           .where('url', `http://localhost:8080/events/${req.params.id}`))).select()
@@ -74,7 +78,12 @@ app.get("/events/:id", (req, res) => {
           console.log("success in getting slots data from DB!");
           res.render("events_show", templateVar);
         });
+
     });
+
+
+
+
 });
 
 app.post("/events", (req, res) => {
@@ -117,20 +126,22 @@ app.post("/events", (req, res) => {
   });
 
   //use mailgun to send email to each attendees
-  var data = {
-    from: 'Mail Gun <postmaster@sandbox6b1150ae072a4a348d011c2f1ad477c1.mailgun.org>',
-    to: dataEvent.emailAttendees,
-    subject: dataEvent.title,
-    text: `Hey there! \n ${dataEvent.organizer_name} has invited you to an event they just created called ${dataEvent.description}! Please follow the link below to vote on your preferred times. \n ${dataEvent.url}`
-  };
 
-  mailgun.messages().send(data, function (error, body) {
-    console.log(data);
-    console.log(error);
-    console.log(body);
-  });
+ var data = {
+   from: `${dataEvent.organizerNames} <postmaster@sandbox6b1150ae072a4a348d011c2f1ad477c1.mailgun.org>`,
+   to: dataEvent.emailAttendees,
+   subject: dataEvent.title,
+   text: dataEvent.url
+ };
 
-  res.redirect('/');
+ mailgun.messages().send(data, function (error, body) {
+   console.log(body);
+ });
+
+
+
+
+ res.redirect('/');
 });
 
 app.listen(PORT, () => {
