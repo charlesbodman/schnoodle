@@ -33,8 +33,8 @@ $(document).ready(function() {
       // slots[date.format('YYYY-MM-DD')] = {};
 
       if (slots[date.format('YYYY-MM-DD')] || $(this).closest('td.fc-past').length) {
-          delete slots[date.format('YYYY-MM-DD')];
-          $(`h3:contains(${date.format('YYYY-MM-DD')})`).parent().remove();
+        delete slots[date.format('YYYY-MM-DD')];
+        $(`h3:contains(${date.format('YYYY-MM-DD')})`).parent().remove();
       } else {
         slots[date.format('YYYY-MM-DD')] = {
           startTime: 0,
@@ -51,7 +51,7 @@ $(document).ready(function() {
         const $endText = $('<p>').text('End Time');
         console.log($startTime.val());
         const $endTime  = $('<input>').addClass('endTime').timepicker({
-          startTime : `${slots[date.format('YYYY-MM-DD')].startTime}`,
+          startTime: `${slots[date.format('YYYY-MM-DD')].startTime}`,
           change: function() {
             slots[date.format('YYYY-MM-DD')].endTime = $endTime.val();
           }
