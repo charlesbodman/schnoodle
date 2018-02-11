@@ -12,7 +12,7 @@ exports.seed = function(knex, Promise) {
           location: 'Lighthouse Labs', 
           organizer_name: 'Shaun', 
           organizer_email: 'shaunmacp@gmail.com', 
-          url: '/events/abcde'})
+          url: 'http://localhost:8080/events/abcdef'})
       ]);
     });
 };

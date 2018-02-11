@@ -49,6 +49,22 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// Home page
+app.get("/events/:id", (req, res) => {
+  const dataEvent = knex('events').where('url', `http://localhost:8080/events/${req.params.id}`).select('title', 'description', 'location', 'organizer_name', 'organizer_email').then(function(result) {
+      const templateVar = result[0];
+      console.log("success in getting event (without slots) data from DB!");
+
+      const dataSlotsOfEvent = knex('slots').where('event_id', (knex.select('id').from('events').where('url', `http://localhost:8080/events/${req.params.id}`))).select().then(function(result) {
+        templateVar.slots = result[0];
+        console.log("success in getting slots data from DB!");
+        console.log(templateVar);
+        res.render("events_show", templateVar);
+
+      })
+  });
+});
+
 app.post("/events", (req, res) => {
 
   const dataEvent = req.body;
