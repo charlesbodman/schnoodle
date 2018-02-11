@@ -21,21 +21,22 @@
   <div class="container">
 
     <!-- top nav bar -->
-    <nav class="navbar navbar-light bg-dark">
-      <a class="navbar-brand float-left" href="#">
+    <nav class="navbar navbar-light bg-dark justify-content-center">
+      <a class="navbar-brand mt-2" href="#">
         <img src="/docs/schnoodog.gif" width="100" height="100" alt="schnoodle dog">
-        <h1 class="display-2 float-right pl-4">Schnooooooooodle!</h1>
+        <h1 class="display-2 float-right pl-4">Schnooooodle!</h1>
       </a>
+      <p class="intro-text">Create an event and share it with your guests. They'll vote on the best time!</p>
     </nav>
 
     <!-- main form -->
     <div class="container">
       <div class="row">
         <div class="col-sm bg-dark"></div>
-        <div class="col-10 py-3">
+        <div class="col-9 py-3">
           <form method="POST" action="/events" id="eventForm">
             <div class="col-10 m-auto">
-              <h3 class="text-center theme-dark">Step 1: provide some details about your event</h3>
+              <h3 class="text-center theme-dark">1. provide some details about your event</h3>
               <div id="event" class="form-group">
                 <fieldset class="p-1">
                   <div class="form-group row">
@@ -73,39 +74,79 @@
             </div>
               <div class="row">
                 <div class="col">
-                  <h3 class="text-center theme-dark">Step 2: choose your dates</h3>
+                  <h5 class="text-center theme-dark">2. choose your dates</h5>
                   <fieldset class="pl-4" id='calendar'></fieldset>
                 </div>
-                <div class="col-3">
-                  <h4 class="text-center theme-dark">Step 3: choose your times</h4>
-                  <fieldset id="time"></fieldset>
+                <div class="col-4">
+                  <h5 class="text-center theme-dark">3. specify the times</h5>
+                  <fieldset id="time" class="m-auto"></fieldset>
                 </div>
+              </div>
+                <!-- mail test box starts here -->
+              <div class="row my-3">
+                <div class="col-sm"></div>
+                <div class="col-8">
+                  <h4 class="text-center text-primary">Step 4: add the emails of your guests:</h4>
+                  <textarea class="form-control text-left" name="text" id ="emailAttendees" placeholder="Put your guests' email addresses here, separated by commas"></textarea>
+                </div>
+                <div class="col-sm"></div>
               </div>
 
               <div class="row">
                 <!-- RandomUrl for attendee -->
-                <div class="col">
-                  <div id="randomURL">
-                    <fieldset id="generateRandomUrl">
-                      <h2> Invite participants via ........</h2>
-                      <p>Everyone with the link can vote-no account requird</p>
-                      <input type="text" id="randomUrl" readonly>
-                      <input type="button" value="copy" id="copy">
-                    </fieldset>
-                  </div>
-                </div>
-                <!-- mail test box starts here -->
-                <div class="col">
-                  <textarea name="text" id ="emailAttendees" placeholder="Enter email of Attendee"></textarea>
-                </div>
+                <div class="col-sm"></div>
+
+                <div class="col-sm"></div>
               </div>
               <div class="row">
                 <!-- Create Event button-->
-                <div class="col-6">
-                  <input class="create-event" type="submit" value="Create Event!" name="event" id="eventButton">
+                <div class="col-sm"></div>
+                <div class="col-auto">
+                  <input class="create-event btn btn-primary m-3" data-toggle="modal" type="submit" value="Create Event!" name="event" data-target="#urlModal" id="eventButton">
                 </div>
+                <div class="col-sm"></div>
               </div>
 
+<!-- Modal -->
+<div class="modal fade" id="urlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="row">
+          <!-- RandomUrl for attendee -->
+          <div class="col">
+            <div id="randomURL">
+              <fieldset id="generateRandomUrl">
+                <h3 class="text-center text-primary">Here is your unique event link:</h3>
+                <p class="text-center">Copy and share it with your guests!</p>
+
+<div class="input-group mb-3">
+  <input type="text" class="form-control" id="randomUrl" readonly>
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-secondary" type="button" id="copy">Copy</button>
+  </div>
+</div>
+
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -113,16 +154,20 @@
 
 
             </form>
+
+
         </div>
+
+
+
         <div class="col-sm bg-dark"></div>
       </div>
     </div>
 
-    <footer class="bg-dark">
-      <p class'p-10'>&copy; 2018 Prerana, Shaun, Dercilio.</p>
+    <footer class="bg-dark p-">
+      <p class="footer-text text-right">&copy; 2018 Created by Dercilio, Prerana, and Shaun.</p>
     </footer>
   </div>
-
   <script
     src="http://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -138,6 +183,30 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
   <script type="text/javascript" src="/scripts/app.js"></script>
+
+
+
+
+
+
+<!-- </main> -->
+      <script
+        src="http://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+
+      <script
+        src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"
+        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+        crossorigin="anonymous"></script>
+
+      <script type="text/javascript" src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
+
+      <script type="text/javascript" src='/scripts/moment.js'></script>
+      <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.min.js'></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+      <script type="text/javascript" src="/scripts/app.js"></script>
 
 </body>
 </html>

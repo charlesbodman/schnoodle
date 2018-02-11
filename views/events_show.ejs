@@ -21,64 +21,46 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.min.css' />
   <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.css">
 
-  <style>
-    .checkbox-custom {
-      height: 50px;
-      width: 90px;
-    }
-
-
-  </style>
-
-
-
-
-
 </head>
 
 <body>
   <header>
     <h1><%= title %></h1>
     <h2><%= organizer_name %></h2>
-    <h3><%= organizer_email %><h3></h3>
+    <h3><%= organizer_email %><h3>
   </header>
+  <div class="container">
+<div class="row">
+  <div class="col">
+    <div class="row">
+      <%= slots.date %>
+    </div>
+    <div class="row">
+      <div class="col"><%= slots.start_time + "/" +slots.end_time %></div>
+    </div>
+    <div class="row"><input type="checkbox" ></div>
+  </div>
+    <div class="col">
+    <div class="row">
+      <%= slots.date %>
+    </div>
+    <div class="row">
+      <div class="col"><%= slots.start_time + "/" +slots.end_time %></div>
+    </div>
+    <div class="row"><input type="checkbox" ></div>
+  </div>
+    <div class="col">
+    <div class="row">
+      <%= slots.date %>
+    </div>
+    <div class="row">
+      <div class="col"><%= slots.start_time + "/" +slots.end_time %></div>
+    </div>
+    <div class="row"><input type="checkbox" ></div>
+  </div>
+</div>
+  </div>
 
-  <!-- Open container -->
-  <!-- <div class="container">
-    <table>
-    <% Object.keys(slots).forEach( function (key) { %>
-      <thead>
-        <tr>
-          <th><%= moment(slots[key].date).format('YYYY-MM-DD') %> (<%= slots[key].start_time %> - <%= slots[key].end_time %>)</th>
-        </tr>
-      </thead>
-    <% }) %>
-      <tbody>
-
-      </tbody>
-  </table>
-</div -->
-<!-- Close container -->
-
-<table id= "slots">
-  <tr>
-    <th><h3>Name</h3></th>
-    <% for (let slot of slots) { %>
-      <th> <%= moment(slot.date).format('YYYY-MM-DD') %><br><%= slot.start_time.split(":").slice(0,2).join(":") + "/" +slot.end_time.split(":").slice(0,2).join(":") %></th>
-    <% } %>
-  </tr>
-
-
-</table>
-
-
-<button>Done</button>
-
-
-
-
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="/scripts/events.js"></script>
 
 </body>
 

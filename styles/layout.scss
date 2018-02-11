@@ -15,12 +15,17 @@ body {
 
   h3.date {
     padding: 5px;
-    font-size: 18px;
-    color: #0D6381;
+    font-size: 15px;
+    color: #aebdc0;
+    text-align: center;
+  }
+
+  .start-text {
+    line-height: 1em;
   }
 
   div.time-div {
-    padding:
+    padding: 0px;
   }
 
   .bg-dark {
@@ -53,12 +58,70 @@ body {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
 
+  .start-text {
+    margin-bottom: 2px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .startTime {
+    display: block;
+    width: 70%;
+    padding: 0.375rem 0.75rem;
+    font-size: 14px;
+    line-height: 0;
+    margin: 0 auto;
+    text-align: center;
+    height: 25px;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0 !important;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .end-text {
+    margin-top: 5px;
+    margin-bottom: 2px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .endTime {
+    display: block;
+    width: 70%;
+    padding: 0.375rem 0.75rem;
+    font-size: 14px;
+    line-height: 0;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    text-align: center;
+    height: 25px;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0 !important;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
   input::placeholder {
     font-family: 'Raleway', sans-serif !important;
   }
 
+  textarea::placeholder {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    line-height: 10px;
+  }
+
   .form-group {
     margin-bottom: 0.5rem !important;
+  }
+
+  .url-link {
+    width: 100%;
   }
 
   .text-primary {
@@ -66,4 +129,16 @@ body {
   font-family: 'Nunito', sans-serif;
   }
 
+  .intro-text {
+    color: #f5f1d1;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+  }
+
+  .footer-text {
+    padding: 30px 20px 30px 0px;
+    color: #f5f1d1;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+  }
 }

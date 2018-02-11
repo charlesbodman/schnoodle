@@ -35,26 +35,28 @@
   /* background-color: #ffffff; */
   border: solid black 1px;
   border-radius: 5px;
-  margin: 10px;
+  // margin: 10px;
   /* float: inherit; */
-  height: 60px;
-  width: 170px;
-  color: #000000;
+  height: 70px;
+  width: 190px;
+  color: #0d6381;
+  background-color: #aebdc0;
+  font-family: 'Raleway', sans-serif;
   font-size: 20px;
   outline: 0;
 }
 
 .create-event:hover {
   /* display: inline-block; */
-  /* background-color: #ffffff; */
+  background-color: #f5f1d1;
   border: solid black 1px;
+  font-family: "Nunito", sans-serif;
   border-radius: 5px;
-  margin: 10px;
+  margin: auto;
   /* float: inherit; */
-  height: 60px;
-  width: 170px;
-  color: #000000;
-  background-color: #df9885;
-  font-size: 20px;
+  height: 70px;
+  width: 190px;
+  color: #0d6381;
+  font-size: 26px;
   outline: 0;
 }
