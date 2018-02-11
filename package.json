@@ -1,5 +1,4 @@
-{
-  "name": "skeleton",
+{  "name": "skeleton",
   "version": "1.0.0",
   "description": "## Project Setup",
   "main": "server.js",
