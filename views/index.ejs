@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Schoodle</title>
+  <title>Schnoodle</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
- <!-- Bootstrap CSS -->
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" type="text/css" href="styles/main.css">
 
   <!-- Google Fonts -->
@@ -19,85 +18,110 @@
 
 </head>
 <body class="bg-light">
-
   <div class="container">
 
     <!-- top nav bar -->
     <nav class="navbar navbar-light bg-dark">
       <a class="navbar-brand float-left" href="#">
         <img src="/docs/schnoodog.gif" width="100" height="100" alt="schnoodle dog">
-        <h1 class="display-2 float-right pl-4">Schooooooooodle!</h1>
+        <h1 class="display-2 float-right pl-4">Schnooooooooodle!</h1>
       </a>
     </nav>
 
-    <!-- main body -->
+    <!-- main form -->
     <div class="container">
       <div class="row">
         <div class="col-sm bg-dark"></div>
         <div class="col-10 py-3">
-        <form method="POST" action="/events" id="eventForm">
-          <h3 class="text-center theme-dark">Step 1: provide some details about your event</h3>
-          <div id="event" class="form-group">
-            <fieldset class="pl-4">
-              <i class="fa fa-user" style="font-size:36px"></i>
-              <!-- <i class="material-icons" style="font-size:36px">name</i> -->
-              <input text="text" class="form-control my-2" name="userName" id="userName" placeholder="Enter your name">
-              <i class="fa fa-envelope-open" style="font-size:36px"></i>
-              <input text="text" class="form-control my-2" name="email" id="email" placeholder="Enter your email" >
-              <i class="fa fa-bullhorn" style="font-size:36px"></i>
-              <input text="text" class="form-control my-2" name="title" id="title" placeholder="Give your event a name">
-              <i class="fa fa-compass" style="font-size:36px"></i>
-              <input text="text" class="form-control my-2" name="location" id="location" placeholder="Add a location">
-              <i class="fa fa-sort-alpha-desc" style="font-size:36px"></i>
-              <input type="text" class="form-control my-2" name="description" id="description" placeholder="Write a short description">
-            </fieldset>
-          </div>
-          <div class="row">
-            <div class="col">
-              <h3 class="text-center theme-dark">Step 2: choose your dates</h3>
-              <fieldset class="pl-4" id='calendar'></fieldset>
+          <form method="POST" action="/events" id="eventForm">
+            <div class="col-10 m-auto">
+              <h3 class="text-center theme-dark">Step 1: provide some details about your event</h3>
+              <div id="event" class="form-group">
+                <fieldset class="p-1">
+                  <div class="form-group row">
+                    <label for="userName" class="col-form-label"><i class="fa fa-user fa-fw" style="font-size:30px; color:#0d6381"></i></label>
+                    <div class="col">
+                      <input text="text" class="form-control text-primary my-0" name="userName" id="userName" placeholder="Start with your name">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="email" class="col-form-label"><i class="fa fa-envelope-open fa-fw" style="font-size:30px; color:#0d6381"></i></label>
+                    <div class="col">
+                      <input text="text" class="form-control text-primary my-0" name="email" id="email" placeholder="Enter your email">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="title" class="col-form-label"><i class="fa fa-bullhorn fa-fw" style="font-size:30px; color:#0d6381"></i></label>
+                    <div class="col">
+                      <input text="text" class="form-control text-primary my-0" name="title" id="title" placeholder="Give your event a snazzy title">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="location" class="col-form-label"><i class="fa fa-compass fa-fw" style="font-size:30px; color:#0d6381"></i></label>
+                    <div class="col">
+                      <input text="text" class="form-control text-primary my-0" name="location" id="location" placeholder="Add a location">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="description" class="col-form-label"><i class="fa fa-sort-alpha-desc fa-fw" style="font-size:30px; color:#0d6381"></i></label>
+                    <div class="col">
+                      <input type="text" class="form-control text-primary my-0" name="description" id="description" placeholder="Write a short description">
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
             </div>
-            <div class="col-3">
-              <h4 class="text-center theme-dark">Step 3: choose your times</h4>
-              <fieldset id="time">
-          <!-- <div></div> -->
-        </fieldset>
-            </div>
+              <div class="row">
+                <div class="col">
+                  <h3 class="text-center theme-dark">Step 2: choose your dates</h3>
+                  <fieldset class="pl-4" id='calendar'></fieldset>
+                </div>
+                <div class="col-3">
+                  <h4 class="text-center theme-dark">Step 3: choose your times</h4>
+                  <fieldset id="time"></fieldset>
+                </div>
+              </div>
+
+              <div class="row">
+                <!-- RandomUrl for attendee -->
+                <div class="col">
+                  <div id="randomURL">
+                    <fieldset id="generateRandomUrl">
+                      <h2> Invite participants via ........</h2>
+                      <p>Everyone with the link can vote-no account requird</p>
+                      <input type="text" id="randomUrl" readonly>
+                      <input type="button" value="copy" id="copy">
+                    </fieldset>
+                  </div>
+                </div>
+                <!-- mail test box starts here -->
+                <div class="col">
+                  <textarea name="text" id ="emailAttendees" placeholder="Enter email of Attendee"></textarea>
+                </div>
+              </div>
+              <div class="row">
+                <!-- Create Event button-->
+                <div class="col-6">
+                  <input class="create-event" type="submit" value="Create Event!" name="event" id="eventButton">
+                </div>
+              </div>
+
+
+
+
+
+
+
+            </form>
         </div>
-        <!-- </form> -->
-
-
-
-
-<!-- RandomUrl for attendee -->
-
-
-    <div id="randomURL">
-      <fieldset id="generateRandomUrl">
-        <h2> Invite participants via ........</h2>
-        <p>Everyone with the link can vote-no account requird</p>
-        <input type="text" id="randomUrl" readonly>
-        <input type="button" value="copy" id="copy">
-      </fieldset>
-  </div>
-
-  <!-- mail test box starts here -->
-    <textarea name="text" id ="emailAttendees" placeholder="Enter email of Attendee"></textarea>
-
-    <input class="create-event" type="submit" value="Create Event!" name="event" id="eventButton">
-
-  </form>
-        </div>
-
-
-        <div class="col-sm bg-dark">
-        </div>
+        <div class="col-sm bg-dark"></div>
       </div>
     </div>
 
-<footer class="bg-dark">
-  <p></p>
-</footer>
+    <footer class="bg-dark">
+      <p class'p-10'>&copy; 2018 Prerana, Shaun, Dercilio.</p>
+    </footer>
+  </div>
   <script
     src="http://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -134,10 +158,7 @@
       <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.min.js'></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
-<<<<<<< HEAD
       <script type="text/javascript" src="/scripts/app.js"></script>
-=======
->>>>>>> 5e6b6b5814f772dd717faeaa9ed3adad4118261f
 
 </body>
 </html>

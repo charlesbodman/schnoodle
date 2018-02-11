@@ -15,7 +15,6 @@ body {
 
   .bg-dark {
     background-color: #0D6381 !important;
-
   }
 
   .theme-light {
@@ -46,6 +45,15 @@ body {
 
   input::placeholder {
     font-family: 'Raleway', sans-serif !important;
+  }
+
+  .form-group {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .text-primary {
+  color: #0d6381 !important;
+  font-family: 'Nunito', sans-serif;
   }
 
 }
