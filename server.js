@@ -14,11 +14,12 @@ const knex = require("knex")(knexConfig[ENV]);
 const morgan = require('morgan');
 const knexLogger = require('knex-logger');
 const cookieSession = require('cookie-session');
+const moment = require('moment');
 
 // Sets mailgun
 const apiKey = 'key-5412572ac2cdec379260ee493eec6183';
 const domain = 'sandbox9190e1faf0154e7ab59d298fdd7a08a5.mailgun.org';
-const mailgun = require('mailgun-js')({apiKey: apikey, domain: domain});
+const mailgun = require('mailgun-js')({apiKey: apiKey, domain: domain});
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -67,8 +68,9 @@ app.get("/events/:id", (req, res) => {
         .where('event_id', (knex.select('id')
           .from('events')
           .where('url', `http://localhost:8080/events/${req.params.id}`))).select()
-        .then(function(result) {
-          templateVar.slots = result[0];
+        .then(function(rows) {
+          templateVar.slots = rows;
+          templateVar.moment = moment;
           console.log("success in getting slots data from DB!");
           res.render("events_show", templateVar);
         });
@@ -91,7 +93,6 @@ app.post("/events", (req, res) => {
 
     for (const key in dataEvent.slots) {
 
-      console.log(key);
       knex.select('id')
         .from('events')
         .where('url', dataEvent.url)

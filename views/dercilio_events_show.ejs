@@ -27,39 +27,25 @@
   <header>
     <h1><%= title %></h1>
     <h2><%= organizer_name %></h2>
-    <h3><%= organizer_email %><h3>
+    <h3><%= organizer_email %><h3></h3>
   </header>
+
+  <!-- Open container -->
   <div class="container">
-<div class="row">
-  <div class="col">
-    <div class="row">
-      <%= slots.date %>
-    </div>
-    <div class="row">
-      <div class="col"><%= slots.start_time + "/" +slots.end_time %></div>
-    </div>
-    <div class="row"><input type="checkbox" ></div>
-  </div>
-    <div class="col">
-    <div class="row">
-      <%= slots.date %>
-    </div>
-    <div class="row">
-      <div class="col"><%= slots.start_time + "/" +slots.end_time %></div>
-    </div>
-    <div class="row"><input type="checkbox" ></div>
-  </div>
-    <div class="col">
-    <div class="row">
-      <%= slots.date %>
-    </div>
-    <div class="row">
-      <div class="col"><%= slots.start_time + "/" +slots.end_time %></div>
-    </div>
-    <div class="row"><input type="checkbox" ></div>
-  </div>
-</div>
-  </div>
+    <table>    
+    <% Object.keys(slots).forEach( function (key) { %> 
+      <thead>
+        <tr>
+          <th><%= moment(slots[key].date).format('YYYY-MM-DD') %> (<%= slots[key].start_time %> - <%= slots[key].end_time %>)</th>
+        </tr>
+      </thead>
+    <% }) %>
+      <tbody>
+          
+      </tbody>
+  </table>
+</div> 
+<!-- Close container -->
 
 
 </body>
