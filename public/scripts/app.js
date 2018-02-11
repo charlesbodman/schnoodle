@@ -86,7 +86,6 @@ $(document).ready(function() {
     eventData.description = $('#description').val();
 
     eventData.url = eventURL;
-    console.log($('#emailAttendees').val());
     eventData.emailAttendees = $('#emailAttendees').val();
 
     $.ajax({
@@ -94,10 +93,6 @@ $(document).ready(function() {
       url: "/events",
       data: eventData,
       success: function(result){
-        //////////////////////////
-        // TODO: REMOVE OR CHANGE
-        console.log("it workds");
-        //////////////////////////
       }
 
     });
