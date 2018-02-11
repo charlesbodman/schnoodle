@@ -57,14 +57,14 @@
 
       </tbody>
   </table>
-</div -->>
+</div -->
 <!-- Close container -->
 
 <table id= "slots">
   <tr>
     <th><h3>Name</h3></th>
     <% for (let slot of slots) { %>
-      <th> <%= moment(slot.date).format('YYYY-MM-DD') %><br><%= slot.start_time.split(5, 0) + "/" +slot.end_time %></th>
+      <th> <%= moment(slot.date).format('YYYY-MM-DD') %><br><%= slot.start_time.split(":").slice(0,2).join(":") + "/" +slot.end_time.split(":").slice(0,2).join(":") %></th>
     <% } %>
   </tr>
 
