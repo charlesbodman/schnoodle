@@ -14,8 +14,9 @@ $(document).ready(function() {
 
   $('td').change(function() {
     console.log (this.cellIndex);
+
     console.log($(this).closest('tr').find('input[type="text"]').val());
-    console.log($(this).parents('table').find('tr:first-child').children('th:nth-child(' + (this.cellIndex + 1) + ')').html())
+    console.log($(this).parents('table').find('tr:first-child').children('th:nth-child(' + (this.cellIndex + 2) + ')').attr('id'))
 
   });
 });
