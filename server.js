@@ -17,8 +17,8 @@ const cookieSession = require('cookie-session');
 const moment = require('moment');
 
 // Sets mailgun
-const apiKey = 'key-5412572ac2cdec379260ee493eec6183';
-const domain = 'sandbox9190e1faf0154e7ab59d298fdd7a08a5.mailgun.org';
+const apiKey = 'key-499843def5fb98f190f28750ae45e872';
+const domain = 'sandbox6b1150ae072a4a348d011c2f1ad477c1.mailgun.org';
 const mailgun = require('mailgun-js')({apiKey: apiKey, domain: domain});
 
 
@@ -58,34 +58,28 @@ app.get("/", (req, res) => {
 // Home page
 app.get("/events/:id", (req, res) => {
 
-  const dataEvent = knex('events')
-    .where('url', `http://localhost:8080/events/${req.params.id}`)
-    .select('title', 'description', 'location', 'organizer_name', 'organizer_email')
-    .then(function(result) {
+  const dataEvent = knex('events').where('url', `http://localhost:8080/events/${req.params.id}`).select('title', 'description', 'location', 'organizer_name', 'organizer_email').then(function(result) {
       const templateVar = result[0];
       console.log("success in getting event (without slots) data from DB!");
 
       templateVar.slots = [];
-       knex('slots')
-        .where('event_id', (knex.select('id')
-          .from('events')
-          .where('url', `http://localhost:8080/events/${req.params.id}`))).select()
-        .then(function(rows) {
+       knex('slots').where('event_id', (knex.select('id').from('events').where('url', `http://localhost:8080/events/${req.params.id}`))).select().then( function(rows) {
           templateVar.slots = rows;
-          templateVar.moment = moment;
+          ////// REMEMBER TO REMOVE THIS IN THE END ///////
+          // templateVar.moment = moment; ////////////////////
+          console.log(rows);
           console.log("success in getting slots data from DB!");
+
           res.render("events_show", templateVar);
         });
-
     });
-
 });
 
+// POST to get the event data and send to DB
 app.post("/events", (req, res) => {
 
   const dataEvent = req.body;
 
-  // Inserts event's data into DB
   knex('events').insert({
     title: dataEvent.title,
     description: dataEvent.description,
@@ -120,10 +114,10 @@ app.post("/events", (req, res) => {
     console.error(error);
   });
 
+  
   //use mailgun to send email to each attendees
-
  var data = {
-   from: `${dataEvent.organizerNames} <postmaster@sandbox6b1150ae072a4a348d011c2f1ad477c1.mailgun.org>`,
+   from: 'Prerana <postmaster@sandbox6b1150ae072a4a348d011c2f1ad477c1.mailgun.org>',
    to: dataEvent.emailAttendees,
    subject: dataEvent.title,
    text: dataEvent.url
@@ -133,12 +127,45 @@ app.post("/events", (req, res) => {
    console.log(body);
  });
 
-
-
-
  res.redirect('/');
 });
 
+app.post("/events/attendee-slots", (req, res) => {
+
+  const dataAttenndee = req.body;
+
+  ///// REMEMBER TO REMOVE THIS IN THE END /////
+  console.log(dataAttenndee); /////////////////
+
+  knex('attendees').insert({
+    name: dataAttenndee.name,
+    email: dataAttenndee.email,
+  }).then( function() {
+
+    for (let i = 0; i < dataAttenndee.slotsID.length; i++) {
+
+      knex.select('id')
+        .from('attendees')
+        .where('email', dataAttenndee.email)
+        .then( function(rows) {
+          return knex.insert({
+            attendee_id: rows[0].id,
+            slot_id: dataAttenndee.slotsID[i] })
+            .into('attendees_slots');
+        }).then( function() {
+          console.log("success in interting attendee_slot!");
+        }).catch(function(error) {
+          console.error(error);
+        });
+
+    }
+
+    console.log("success in insert attendee to DB!");
+  }).catch(function(error) {
+    console.error(error);
+  });
+
+});
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });

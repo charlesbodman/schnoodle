@@ -8,14 +8,14 @@ exports.seed = function(knex, Promise) {
         knex('slots').insert([
           {
             date: '2018-02-07', 
-            start_time: '17:00:00', 
-            end_time: '20:00:00', 
+            start_time: '04:00 PM', 
+            end_time: '06:00 PM', 
             event_id: 1
           },
           {
             date: '2018-02-08', 
-            start_time: '16:00:00', 
-            end_time: '18:00:00', 
+            start_time: '05:00 PM', 
+            end_time: '07:00 PM', 
             event_id: 1
           }
         ]),
