@@ -44,7 +44,6 @@ app.use("/styles", sass({
   dest: __dirname + "/public/styles",
   debug: true,
   outputStyle: 'expanded'
-  // prefix: '/styles'
 }));
 app.use(express.static("public"));
 
@@ -66,7 +65,6 @@ app.get("/events/:id", (req, res) => {
       const templateVar = result[0];
       console.log("success in getting event (without slots) data from DB!");
 
-
       templateVar.slots = [];
        knex('slots')
         .where('event_id', (knex.select('id')
@@ -80,9 +78,6 @@ app.get("/events/:id", (req, res) => {
         });
 
     });
-
-
-
 
 });
 
