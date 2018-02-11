@@ -5,16 +5,16 @@
   padding: 40px;
   background-color: white;
   display: grid;
-  // max-width: 500px;
+  max-width: 500px;
   grid-row-gap: 40px;
   grid-template-columns:10% 90%;
   margin: 0 auto;
-  // box-shadow: 5px 10px 18px #888888;
+  box-shadow: 5px 10px 18px #888888;
 }
 #event input {
   font-size: 18px;
   border: none;
-  border-bottom: 1px solid #aebdc0;
+  border-bottom: 1px solid orange;
   word-wrap: break-word;
 }
 #event input:focus {

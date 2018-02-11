@@ -56,28 +56,28 @@ app.get("/", (req, res) => {
 
 // Home page
 app.get("/events/:id", (req, res) => {
-  const dataEvent = knex('events').where('url', `http://localhost:8080/events/${req.params.id}`).select('title', 'description', 'location', 'organizer_name', 'organizer_email').then(function(result) {
-    const templateVar = result[0];
-    console.log("success in getting event (without slots) data from DB!");
 
-    const dataSlotsOfEvent = knex('slots').where('event_id', (knex.select('id').from('events').where('url', `http://localhost:8080/events/${req.params.id}`))).select().then(function(result) {
-      templateVar.slots = result[0];
-      console.log("success in getting slots data from DB!");
-      console.log(templateVar);
-      res.render("events_show", templateVar);
-
+  const dataEvent = knex('events')
+    .where('url', `http://localhost:8080/events/${req.params.id}`)
+    .select('title', 'description', 'location', 'organizer_name', 'organizer_email')
+    .then(function(result) {
+      const templateVar = result[0];
+      console.log("success in getting event (without slots) data from DB!");
+      const dataSlotsOfEvent = knex('slots')
+        .where('event_id', (knex.select('id')
+          .from('events')
+          .where('url', `http://localhost:8080/events/${req.params.id}`))).select()
+        .then(function(result) {
+          templateVar.slots = result[0];
+          console.log("success in getting slots data from DB!");
+          res.render("events_show", templateVar);
+        });
     });
-  });
 });
 
 app.post("/events", (req, res) => {
 
   const dataEvent = req.body;
-
-  //////////////////////////
-  // REMOVE !!!           //
-  console.log(dataEvent);
-  ///////////////////////////
 
   // Inserts event's data into DB
   knex('events').insert({
@@ -96,9 +96,12 @@ app.post("/events", (req, res) => {
         .from('events')
         .where('url', dataEvent.url)
         .then( function(rows) {
-        ////////////////////  REMOVE  /////////////////////////////
-        // console.log(`eventID: ${rows[0].id} - typeof: ${typeof rows[0].id}`)
-          return knex.insert({ date: key, start_time: dataEvent.slots[key].startTime, end_time: dataEvent.slots[key].endTime, event_id: rows[0].id }).into('slots');
+          return knex.insert({
+            date: key,
+            start_time: dataEvent.slots[key].startTime,
+            end_time: dataEvent.slots[key].endTime,
+            event_id: rows[0].id })
+            .into('slots');
         }).then( function() {
           console.log("success in interting slot!");
         }).catch(function(error) {
@@ -114,13 +117,15 @@ app.post("/events", (req, res) => {
 
   //use mailgun to send email to each attendees
   var data = {
-    from: 'Mail Gun <postmaster@sandbox9190e1faf0154e7ab59d298fdd7a08a5.mailgun.org>',
-    to: 'prerana.sh@gmail.com, sh.sudip@gmail.com, dercilioafontes@gmail.com',
-    subject: 'Invitation from schoodle',
-    text: 'Testing some Mailgun awesomeness!'
+    from: 'Mail Gun <postmaster@sandbox6b1150ae072a4a348d011c2f1ad477c1.mailgun.org>',
+    to: dataEvent.emailAttendees,
+    subject: dataEvent.title,
+    text: `Hey there! \n ${dataEvent.organizer_name} has invited you to an event they just created called ${dataEvent.description}! Please follow the link below to vote on your preferred times. \n ${dataEvent.url}`
   };
 
   mailgun.messages().send(data, function (error, body) {
+    console.log(data);
+    console.log(error);
     console.log(body);
   });
 

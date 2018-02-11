@@ -49,7 +49,6 @@ $(document).ready(function() {
           }
         });
         const $endText = $('<p>').text('End Time');
-        console.log($startTime.val());
         const $endTime  = $('<input>').addClass('endTime').timepicker({
           startTime: `${slots[date.format('YYYY-MM-DD')].startTime}`,
           change: function() {
@@ -64,6 +63,17 @@ $(document).ready(function() {
     }
   });
 
+
+
+
+
+
+
+
+
+
+
+
   // Prevents default behavior of the form event submission and sets the data in a object to post to server using
   $('#eventForm').on('submit', (event) => {
 
@@ -76,7 +86,8 @@ $(document).ready(function() {
     eventData.description = $('#description').val();
 
     eventData.url = eventURL;
-    eventData.emailAttendees = $('#email').val();
+    console.log($('#emailAttendees').val());
+    eventData.emailAttendees = $('#emailAttendees').val();
 
     $.ajax({
       method: "POST",
