@@ -63,17 +63,6 @@ $(document).ready(function() {
     }
   });
 
-
-
-
-
-
-
-
-
-
-
-
   // Prevents default behavior of the form event submission and sets the data in a object to post to server using
   $('#eventForm').on('submit', (event) => {
 
