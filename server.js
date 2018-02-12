@@ -55,24 +55,83 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-// Home page
+
+
+// app.get("/events/:id", (req, res) => {
+
+// const templateVar = knex('events').where('url', `http://localhost:8080/events/${req.params.id}`).select('title', 'description', 'location', 'organizer_name', 'organizer_email').then(function(result) {
+// const templateVar = result[0];
+
+
+
+// knex('slots').where('event_id', (knex.select('id').from('events').where('url', `http://localhost:8080/events/${req.params.id}`))).select().then( function(rows) {
+
+// templateVar.slots = rows;
+// console.log(slots);
+
+// templateVar.objCountSlotID = {};
+
+// rows.forEach( function(rowOfSlot) {
+
+// const objCountSlotID = knex('attendees_slots').select('slot_id').count('slot_id').where('slot_id', rowOfSlot.id).groupBy('slot_id').then( function(result) {
+
+
+
+// templateVar.objCountSlotID[result[0].slot_id] = result[0].count;
+// // console.log(templateVar.arrayCountSlotID[0].slot_it);
+
+// // console.log(templateVar.objCountSlotID);
+// // console.log("Inside the loop:", templateVar);
+// // res.status(201).send(templateVar);
+// // res.render("events_show", templateVar);
+// });
+// });
+// // console.log("Outside the loop:",templateVar);
+
+
+
+
+// })
+// });
+
+// res.render("events_show", templateVar);
+
+// });
+
+
+
+
+
+
+
+
+
+
+
+//Home page
 app.get("/events/:id", (req, res) => {
+    let templateVar = 0;
+   knex('events').where('url', `http://localhost:8080/events/${req.params.id}`).select('title', 'description', 'location', 'organizer_name', 'organizer_email').then(function(result) {
+    templateVar = result[0];
+    templateVar.slots = [];
+    knex('slots').where('event_id', (knex.select('id').from('events').where('url', `http://localhost:8080/events/${req.params.id}`))).select().then( function(rows) {
+      templateVar.slots = rows;
+      templateVar.objCountSlotID = {};
+      knex().select()
+        .from('attendees_slots')
+        .join('slots', 'slots.id','slot_id')
+        .join('attendees','attendees.id','attendee_id')
+        .join('events', 'events.id', 'event_id')
+        .where('event_id','1')
+      // .groupBy('date')
+      .then (templateVar =>
+        {
+          res.render("events_show",{slots: rows, events: templateVar});
 
-  const dataEvent = knex('events').where('url', `http://localhost:8080/events/${req.params.id}`).select('title', 'description', 'location', 'organizer_name', 'organizer_email').then(function(result) {
-      const templateVar = result[0];
-      console.log("success in getting event (without slots) data from DB!");
-
-      templateVar.slots = [];
-       knex('slots').where('event_id', (knex.select('id').from('events').where('url', `http://localhost:8080/events/${req.params.id}`))).select().then( function(rows) {
-          templateVar.slots = rows;
-          ////// REMEMBER TO REMOVE THIS IN THE END ///////
-          // templateVar.moment = moment; ////////////////////
-          console.log(rows);
-          console.log("success in getting slots data from DB!");
-
-          res.render("events_show", templateVar);
         });
+
     });
+   });
 });
 
 // POST to get the event data and send to DB
@@ -114,7 +173,7 @@ app.post("/events", (req, res) => {
     console.error(error);
   });
 
-  
+
   //use mailgun to send email to each attendees
  var data = {
    from: 'Prerana <postmaster@sandbox6b1150ae072a4a348d011c2f1ad477c1.mailgun.org>',
