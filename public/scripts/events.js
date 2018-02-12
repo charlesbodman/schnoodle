@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   const attenndeeData = {};
-  const attenndeeSlotsID =[];
+  const attenndeeSlotsID = [];
 
   const numberOfSlots = $('table').find('th').length - 1;
   const $nameAttendee = $('<input type="text" placeholder="name">');
@@ -44,10 +44,23 @@ $(document).ready(function() {
       url: "/events/attendee-slots",
       data: attenndeeData,
       success: function(result){
+        console.log("Success sending post");
       }
-
-
     });
   });
+
+  // $('#attendee-result').on('click', (event) => {
+
+  //   event.preventDefault();
+
+  //   $.ajax({
+  //     method: "GET",
+  //     url: "/events/attendee-slots",
+  //     success: function(result){
+  //     }
+  //   });
+  // });
+
 });
+// End of
 

@@ -82,12 +82,9 @@ $(document).ready(function() {
       url: "/events",
       data: eventData,
       success: function(result){
+        console.log("Success sending event data")
       }
 
     });
   });
 });
-
-
-
-
