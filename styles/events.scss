@@ -1,0 +1,35 @@
+.checkbox-cell {
+  text-align: center
+}
+
+input[type='checkbox'] {
+    -webkit-appearance: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 2px solid #0d6381;
+    outline: none;
+}
+
+input[type='checkbox']:hover {
+    background-color: lightGray;
+    background-size: 50px;
+    background-position: center;
+    outline: none;
+}
+
+input[type='checkbox']:checked {
+    background: url("../docs/schnoodog.gif");
+    background-size: 50px;
+    background-position: center;
+    outline: none;
+}
+
+.slot-text {
+  font-size: 14px;
+}
+
+.form-fill {
+  text-align: center;
+
+}

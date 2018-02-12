@@ -4,20 +4,19 @@ $(document).ready(function() {
   const attenndeeSlotsID =[];
 
   const numberOfSlots = $('table').find('th').length - 1;
-  const $nameAttendee = $('<input type="text" placeholder="name">');
-  const $emailAttendee = $('<input type="email" placeholder="email">');
+  const $nameAttendee = $('<input type="text" placeholder="name" class="text-primary form-fill">');
+  const $emailAttendee = $('<input type="email" placeholder="email" class="text-primary form-fill">');
   const $tr = $('<tr>');
   $tr.append($nameAttendee);
   $tr.append('<tr>');
   $tr.append($emailAttendee);
   for (let i = 0; i < numberOfSlots; i++) {
-    const $checkbox = $('<input type="checkbox" name="amount" />');
-    const $td = $('<td>').append($checkbox);
+    const $checkbox = $('<input type="checkbox" name="amount" class="checkbox"/>');
+    const $td = $('<td>').addClass('checkbox-cell').append($checkbox);
     $td.append($checkbox);
     $tr.append($td);
   }
   $('#slots').append($tr);
-
 
   $('td').change(function(event) {
 
@@ -46,8 +45,8 @@ $(document).ready(function() {
       success: function(result){
       }
 
-
     });
   });
+
 });
 

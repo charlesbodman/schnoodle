@@ -1,44 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>Schnoodle</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
- <title>Schoodle</title>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="/styles/main.css">
 
- <link rel="stylesheet" type="text/css" href="/styles/main.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:800|Raleway" rel="stylesheet">
 
- <!-- Google Fonts -->
- <link href="https://fonts.googleapis.com/css?family=Nunito:300|Raleway" rel="stylesheet">
+  <!-- Date and Time Picker CSS -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.min.css' />
+  <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.css">
 
- <!-- Date and Time Picker CSS -->
- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.min.css' />
- <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.css">
+  <!-- Font Awesome -->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 </head>
 
-<body>
- <header>
-   <h1><%= title %></h1>
-   <h2><%= organizer_name %></h2>
-   <h3><%= organizer_email %><h3></h3>
- </header>
+<body class="bg-light">
+  <div class="container">
 
-<table id= "slots">
- <tr>
-   <th><h3>Name</h3></th>
-   <% for (let slot of slots) { %>
+    <!-- top nav bar -->
+    <nav class="navbar navbar-light bg-dark justify-content-center">
+      <a class="navbar-brand mt-2" href="#">
+        <img src="/docs/schnoodog.gif" width="100" height="100" alt="schnoodle dog">
+        <h1 class="display-2 float-right pl-4">Schnooooodle!</h1>
+      </a>
+      <p class="intro-text">You've been invited to an event. Pick your best time to schnoodle!</p>
+    </nav>
 
-     <th id="<%= slot.id %>"> <%= slot.date %><br><%= slot.start_time + "/" + slot.end_time %> </th>
-     <%}%>
+    <!-- main section -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm bg-dark"></div>
+        <div class="col-8">
+          <div class="row">
+            <h3 class="m-auto theme-dark"><%= title %>, an event created by <%= organizer_name %></h3>
+          </div>
+          <div class="row">
+            <div class="col"></div>
+          </div>
 
- </tr>
+          <table id= "slots" class="table table-bordered">
+            <tr>
+              <th scope="row" class="text-center slot-text"><h5>Enter your contact info:</h5></th>
+              <% for (let slot of slots) { %>
+              <th scope="row" class="text-center slot-text" id="<%= slot.id %>"> <%= slot.date %><br><%= slot.start_time + " to " + slot.end_time %> </th>
+              <%}%>
+            </tr>
 
-</table>
+          </table>
+          <!-- this is the button for the modal -->
+          <div class="row">
+          <input class="m-auto create-event btn btn-primary m-3" data-toggle="modal" type="submit" value="Submit!" name="event" data-target="#resultsModal" id="attendee-done">
+          </div>
+          <div class="row mb-3">
+          </div>
 
-<button id="attendee-done">Done</button>
+        </div>
+        <div class="col-sm bg-dark"></div>
+      </div>
+    </div>
+    <!-- End main section-->
 
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <div>
+  <%- include("partials/_modal") %>
+  </div>
+
+    <footer class="bg-dark p-">
+      <p class="footer-text text-right">&copy; 2018 Created by Dercilio, Prerana, and Shaun.</p>
+    </footer>
+
+</div>
+
+      <script
+        src="http://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+
+      <script
+        src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"
+        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+        crossorigin="anonymous"></script>
+
+      <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+
+      <script type="text/javascript" src='/scripts/moment.js'></script>
+      <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.min.js'></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+      <script type="text/javascript" src="/scripts/app.js"></script>
+
+
+<!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
 <script type="text/javascript" src="/scripts/events.js"></script>
 
 </body>
+</html>

@@ -114,7 +114,7 @@ app.post("/events", (req, res) => {
     console.error(error);
   });
 
-  
+
   //use mailgun to send email to each attendees
  var data = {
    from: 'Prerana <postmaster@sandbox6b1150ae072a4a348d011c2f1ad477c1.mailgun.org>',
