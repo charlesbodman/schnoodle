@@ -19,4 +19,34 @@
 
 <body>
 
+ <header>
+   <h1><%= title %></h1>
+   <h2><%= organizerName %></h2>
+   <h3><%= organizerEmail %><h3></h3>
+ </header>
+
+ <h1 id="countSlotIDs" hidden><%- JSON.stringify(countSlotIDs) %></h1>
+ <h1 id="slotsData" hidden><%- JSON.stringify(slots) %></h1>
+
+<table id= "slots">
+  <tr>
+    <th><h3>Name</h3></th>
+    <% for (let slot of slots) { %>
+      <th id="<%= slot.id %>"> <%= slot.date %><br><%= slot.start_time + "/" + slot.end_time %></br> Count: <%= countSlotIDs[slot.id] %> </th>
+    <%}%>
+  </tr>
+
+</table>
+
+<canvas id="barChart"></canvas>
+
+<button id="attendee-done">Done</button>
+
+<script type=“text/javascript” src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="/scripts/events.js"></script>
+<script type="text/javascript" src="/scripts/result-char-bar.js"></script>
+
+
 </body>

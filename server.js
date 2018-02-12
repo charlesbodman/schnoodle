@@ -55,6 +55,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+<<<<<<< HEAD
 
 
 // app.get("/events/:id", (req, res) => {
@@ -130,6 +131,87 @@ app.get("/events/:id", (req, res) => {
 
         });
 
+=======
+// Page to chose the slots of time and to show the result
+app.get("/events/:id", (req, res) => {
+
+  const templateVar = {};
+
+  // Gets event data from DB by url
+  knex('events').where('url', `http://localhost:8080/events/${req.params.id}`)
+    .select('id', 'title', 'description', 'location', 'organizer_name', 'organizer_email')
+    .then(function(arrayRowsOfEvents) {
+
+    // Protectioin for Unhandled rejection TypeError
+      if (arrayRowsOfEvents[0] &&  arrayRowsOfEvents[0].title) {
+        templateVar.title = arrayRowsOfEvents[0].title;
+        templateVar.description = arrayRowsOfEvents[0].description;
+        templateVar.location = arrayRowsOfEvents[0].location;
+        templateVar.organizerName = arrayRowsOfEvents[0].organizer_name;
+        templateVar.organizerEmail = arrayRowsOfEvents[0].organizer_email;
+      }
+
+      // Protectioin for Unhandled rejection TypeError
+      if (arrayRowsOfEvents[0] &&  arrayRowsOfEvents[0].id) {
+      
+      // Returns event_id to the next query
+        return arrayRowsOfEvents[0].id;
+      }
+
+    }).then(function(eventID) {
+
+      // Protectioin for Unhandled rejection TypeError
+      if (eventID) {
+      // Gets slots data from DB by event_id
+        knex('slots').where('event_id', eventID).select().then(function(arrayRowsOfSlots) {
+
+          templateVar.slots = arrayRowsOfSlots;
+
+          const arrayOfSlotID = [];
+
+          // Pushs slot_id to arrayOfSlotID to return to the next query
+          for (let i = 0; i < arrayRowsOfSlots.length; i++) {
+
+          // Protectioin for Unhandled rejection TypeError
+            if (arrayRowsOfSlots[i] &&  arrayRowsOfSlots[i].id) {
+
+              arrayOfSlotID.push(arrayRowsOfSlots[i].id);
+            }
+          }
+
+          return arrayOfSlotID;
+
+        
+        }).then(function(arrayOfSlotID) {
+
+          const objCountSlotIDs = {};
+
+          for (let i = 0; i < arrayOfSlotID.length; i++) {
+
+            knex('attendees_slots').select('slot_id').count('slot_id').where('slot_id', arrayOfSlotID[i])
+              .groupBy('slot_id').then(function(dataSlotIDCount) {
+
+                // Protectioin for Unhandled rejection TypeError
+                if(dataSlotIDCount && dataSlotIDCount[0]) {
+
+                  objCountSlotIDs[dataSlotIDCount[0].slot_id] = dataSlotIDCount[0].count;
+                }
+
+                // Renders the pages events_show when finished the loop with all data.
+                if (i === arrayOfSlotID.length - 1) {
+
+                  templateVar.countSlotIDs = objCountSlotIDs;
+
+                  res.render("events_show", templateVar);
+                }
+
+              });
+          }
+
+        });
+      // End of if -- Protectioin for Unhandled rejection TypeError
+      }
+>>>>>>> 4665b150ed9809008e52f745bc42e6c30c124363
     });
    });
 });
@@ -165,40 +247,34 @@ app.post("/events", (req, res) => {
         }).catch(function(error) {
           console.error(error);
         });
-
     }
-
-    console.log("success in insert event to DB!");
   }).catch(function(error) {
     console.error(error);
   });
 
 
   //use mailgun to send email to each attendees
- var data = {
-   from: 'Prerana <postmaster@sandbox6b1150ae072a4a348d011c2f1ad477c1.mailgun.org>',
-   to: dataEvent.emailAttendees,
-   subject: dataEvent.title,
-   text: dataEvent.url
- };
+  var data = {
+    from: 'Prerana <postmaster@sandbox6b1150ae072a4a348d011c2f1ad477c1.mailgun.org>',
+    to: dataEvent.emailAttendees,
+    subject: dataEvent.title,
+    text: dataEvent.url
+  };
 
- mailgun.messages().send(data, function (error, body) {
-   console.log(body);
- });
+  mailgun.messages().send(data, function (error, body) {
+    console.log(body);
+  });
 
- res.redirect('/');
+  res.redirect('/');
 });
 
 app.post("/events/attendee-slots", (req, res) => {
 
   const dataAttenndee = req.body;
 
-  ///// REMEMBER TO REMOVE THIS IN THE END /////
-  console.log(dataAttenndee); /////////////////
-
   knex('attendees').insert({
     name: dataAttenndee.name,
-    email: dataAttenndee.email,
+    email: dataAttenndee.email
   }).then( function() {
 
     for (let i = 0; i < dataAttenndee.slotsID.length; i++) {
@@ -210,16 +286,14 @@ app.post("/events/attendee-slots", (req, res) => {
           return knex.insert({
             attendee_id: rows[0].id,
             slot_id: dataAttenndee.slotsID[i] })
-            .into('attendees_slots');
-        }).then( function() {
-          console.log("success in interting attendee_slot!");
+            .into('attendees_slots')
+            .then(function() {
+              console.log("success in interting attendee_slot!");
+            });
         }).catch(function(error) {
           console.error(error);
         });
-
     }
-
-    console.log("success in insert attendee to DB!");
   }).catch(function(error) {
     console.error(error);
   });
