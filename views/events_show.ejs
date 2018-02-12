@@ -52,6 +52,26 @@
               <%}%>
             </tr>
 
+<!-- <body>
+
+ <header>
+   <h1><%= title %></h1>
+   <h2><%= organizerName %></h2>
+   <h3><%= organizerEmail %><h3></h3>
+ </header> -->
+
+ <h1 id="countSlotIDs"><%- JSON.stringify(countSlotIDs) %></h1>
+ <h1 id="slotsData"><%- JSON.stringify(slots) %></h1>
+
+<table id= "slots">
+  <tr>
+    <th><h3>Name</h3></th>
+    <% for (let slot of slots) { %>
+      <th id="<%= slot.id %>"> <%= slot.date %><br><%= slot.start_time + "/" + slot.end_time %></br> Count: <%= countSlotIDs[slot.id] %> </th>
+    <%}%>
+  </tr>
+
+
           </table>
           <!-- this is the button for the modal -->
           <div class="row">
@@ -59,6 +79,8 @@
           </div>
           <div class="row mb-3">
           </div>
+
+
 
         </div>
         <div class="col-sm bg-dark"></div>
@@ -97,8 +119,16 @@
       <script type="text/javascript" src="/scripts/app.js"></script>
 
 
-<!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
+<canvas id="barChart"></canvas>
+
+<button id="attendee-done">Done</button>
+
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
 <script type="text/javascript" src="/scripts/events.js"></script>
+<script type="text/javascript" src="/scripts/result-char-bar.js"></script>
+
 
 </body>
 </html>

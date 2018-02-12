@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   const attenndeeData = {};
-  const attenndeeSlotsID =[];
+  const attenndeeSlotsID = [];
 
   const numberOfSlots = $('table').find('th').length - 1;
   const $nameAttendee = $('<input type="text" placeholder="name" class="text-primary form-fill">');
@@ -34,6 +34,13 @@ $(document).ready(function() {
 
   });
 
+  //count the number of row selected
+
+alert($('tr').filter(function() {
+    return $(this).find('.selected');
+}).length);
+
+
   $('#attendee-done').on('click', (event) => {
 
     event.preventDefault();
@@ -43,10 +50,10 @@ $(document).ready(function() {
       url: "/events/attendee-slots",
       data: attenndeeData,
       success: function(result){
+        console.log("Success sending post");
       }
 
     });
   });
 
 });
-
