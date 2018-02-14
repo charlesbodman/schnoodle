@@ -8,6 +8,11 @@ $(document).ready( function() {
   const arrayValueInOrderWithLabel = [];
   const arrayLabelInOrder = [];
 
+
+  console.log(countSlotIDs);
+  console.log(arraySlotsData);
+
+
   arraySlotsData.forEach(function (item) {
     arrayValueInOrderWithLabel.push(Number(countSlotIDs[item.id]));
     arrayLabelInOrder.push(`${item.date} - ${item.start_time} / ${item.end_time}`);
@@ -39,7 +44,7 @@ $(document).ready( function() {
     data: {
       labels: arrayLabelInOrder,
       datasets: [{
-        label: '# of Votes',
+        label: '% of Votes',
         data: arrayValueInOrderWithLabel,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -60,11 +65,13 @@ $(document).ready( function() {
         borderWidth: 1
       }]
     },
-    optionss: {
+    options: {
       scales: {
         yAxes: [{
           ticks: {
-            beginAtZero: true
+            min: 0,
+            max: 100,
+            callback: function(value){return value + "%"}
           }
         }]
       }

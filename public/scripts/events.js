@@ -49,17 +49,6 @@ $(document).ready(function() {
     });
   });
 
-  // $('#attendee-result').on('click', (event) => {
-
-  //   event.preventDefault();
-
-  //   $.ajax({
-  //     method: "GET",
-  //     url: "/events/attendee-slots",
-  //     success: function(result){
-  //     }
-  //   });
-  // });
 
 });
 // End of
