@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   const attenndeeData = {};
   const attenndeeSlotsID = [];
-
+  
   const numberOfSlots = $('table').find('th').length - 1;
   const $nameAttendee = $('<input type="text" placeholder="name" class="text-primary form-fill">');
   const $emailAttendee = $('<input type="email" placeholder="email" class="text-primary form-fill">');
@@ -34,13 +34,6 @@ $(document).ready(function() {
 
   });
 
-  //count the number of row selected
-
-alert($('tr').filter(function() {
-    return $(this).find('.selected');
-}).length);
-
-
   $('#attendee-done').on('click', (event) => {
 
     event.preventDefault();
@@ -54,6 +47,8 @@ alert($('tr').filter(function() {
       }
 
     });
-  });
 
+    // Reload the page to update the chart bar
+    window.location.reload(true);
+  });
 });
