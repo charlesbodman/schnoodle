@@ -1,0 +1,33 @@
+<!-- views/partials/modal.ejs -->
+
+<div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-primary">PARTIAL TEST Check the results!</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table id= "slots" class="table table-bordered">
+          <tr>
+            <!-- <th scope="row" class="text-center"><h5>Enter your info below:</h5></th> -->
+            <% for (let slot of slots) { %>
+            <th scope="row" class="text-center" id="<%= slot.id %>"> <%= slot.date %><br><%= slot.start_time + " to " + slot.end_time %> </th>
+            <%}%>
+         </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal - insert this line in events_show.ejs -->
+
