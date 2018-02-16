@@ -37,9 +37,6 @@ $(document).ready(function() {
 
   //count the number of row selected
 
-alert($('tr').filter(function() {
-    return $(this).find('.selected');
-}).length);
 
 
   $('#attendee-done').on('click', (event) => {
@@ -56,18 +53,7 @@ alert($('tr').filter(function() {
     });
   });
 
-  // $('#attendee-result').on('click', (event) => {
-
-  //   event.preventDefault();
-
-  //   $.ajax({
-  //     method: "GET",
-  //     url: "/events/attendee-slots",
-  //     success: function(result){
-  //     }
-  //   });
-  // });
 
 });
-// End of
+
 
