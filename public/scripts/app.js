@@ -29,9 +29,7 @@ $(document).ready(function() {
     dayClick: function(date, jsEvent, view) {
       $(this).closest('td.fc-past').toggleClass('down');
       $(this).closest('td').toggleClass('down');
-      // const index = dateChosen.indexOf(date.format('YYYY-MM-DD'));
-      // slots[date.format('YYYY-MM-DD')] = {};
-
+      
       if (slots[date.format('YYYY-MM-DD')] || $(this).closest('td.fc-past').length) {
         delete slots[date.format('YYYY-MM-DD')];
         $(`h3:contains(${date.format('YYYY-MM-DD')})`).parent().remove();
@@ -82,7 +80,7 @@ $(document).ready(function() {
       url: "/events",
       data: eventData,
       success: function(result){
-        console.log("Success sending event data")
+        console.log("Success sending event data");
       }
 
     });

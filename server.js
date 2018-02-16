@@ -65,7 +65,7 @@ app.get("/events/:id", (req, res) => {
     .select('id', 'title', 'description', 'location', 'organizer_name', 'organizer_email')
     .then(function(arrayRowsOfEvents) {
 
-    // Protectioin for Unhandled rejection TypeError
+    // Protection for Unhandled rejection TypeError
       if (arrayRowsOfEvents[0] &&  arrayRowsOfEvents[0].title) {
         templateVar.title = arrayRowsOfEvents[0].title;
         templateVar.description = arrayRowsOfEvents[0].description;
@@ -134,6 +134,7 @@ app.get("/events/:id", (req, res) => {
         });
       // End of if -- Protectioin for Unhandled rejection TypeError
       }
+
 
     });
    });

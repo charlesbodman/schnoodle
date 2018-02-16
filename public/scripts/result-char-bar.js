@@ -1,38 +1,20 @@
 $(document).ready( function() {
 
-
+  // Gets the data from the events:id page
   const countSlotIDs = JSON.parse($('#countSlotIDs').text());
   const arraySlotsData = JSON.parse($('#slotsData').text());
 
 
-  const arrayValueInOrderWithLabel = [];
+  const arrayValueInTheLabelOrder = [];
   const arrayLabelInOrder = [];
 
+  // Passes to arrays to feed the bar chart
   arraySlotsData.forEach(function (item) {
-    arrayValueInOrderWithLabel.push(Number(countSlotIDs[item.id]));
+    arrayValueInTheLabelOrder.push(Number(countSlotIDs[item.id]));
     arrayLabelInOrder.push(`${item.date} - ${item.start_time} / ${item.end_time}`);
   });
 
-
-
-  console.log(arrayLabelInOrder);
-  console.log(arrayValueInOrderWithLabel);
-
-  /*
-
-  countSlotIDs
-  {"7":"3","8":"7","9":"4"}
-
-  slotsData
-[{"id":7,"date":"2018-02-28","start_time":"02:00 AM","end_time":"04:00 AM","event_id":3},
-{"id":8,"date":"2018-02-27","start_time":"12:00 AM","end_time":"01:00 AM","event_id":3},
-{"id":9,"date":"2018-02-23","start_time":"05:00 AM","end_time":"06:00 AM","event_id":3}]
-
-  */
-
-
-
-  //bar
+  // bar chart
   var ctxB = document.getElementById("barChart").getContext('2d');
   Chart.defaults.global.scaleBeginAtZero = true;
   var myBarChart = new Chart(ctxB, {
@@ -40,8 +22,8 @@ $(document).ready( function() {
     data: {
       labels: arrayLabelInOrder,
       datasets: [{
-        label: '# of Votes',
-        data: arrayValueInOrderWithLabel,
+        label: '% of Votes',
+        data: arrayValueInTheLabelOrder,
         backgroundColor: [
           'rgba(255, 99, 132)',
           'rgba(54, 162, 235)',
