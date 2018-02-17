@@ -36,11 +36,6 @@ $(document).ready(function() {
 
   //count the number of row selected
 
-alert($('tr').filter(function() {
-    return $(this).find('.selected');
-}).length);
-
-
   $('#attendee-done').on('click', (event) => {
 
     event.preventDefault();
@@ -50,7 +45,7 @@ alert($('tr').filter(function() {
       url: "/events/attendee-slots",
       data: attenndeeData,
       success: function(result){
-        console.log("Success sending post");
+        console.log(result);
       }
 
     });

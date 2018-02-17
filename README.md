@@ -1,29 +1,30 @@
-# Node Skeleton
+# Schnoodle
 
-## Project Setup
-
-1. Create your own empty repo on GitHub
-2. Clone this repository (do not fork)
-  - Suggestion: When cloning, specify a different folder name that is relevant to your project
-3. Remove the git remote: `git remote rm origin`
-4. Add a remote for your origin: `git remote add origin <your github repo URL>`
-5. Push to the new origin: `git push -u origin master`
-6. Verify that the skeleton code now shows up in your repo on GitHub
+Schnoodle is a simplified clone of Doodle, a popular group-scheduling app. The app was developed by Dercilio Alves Fontes, Prerana Shrestha, and Shaun Macpherson as their midterm project for Lighthouse Labs' Web Development bootcamp. 
 
 ## Getting Started
 
-1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
-2. Update the .env file with your correct local information
-3. Install dependencies: `npm i`
-4. Fix to binaries for sass: `npm rebuild node-sass`
-5. Run migrations: `npm run knex migrate:latest`
-  - Check the migrations folder to see what gets created in the DB
-6. Run the seed: `npm run knex seed:run`
-  - Check the seeds file to see what gets seeded in the DB
-7. Run the server: `npm run local`
-8. Visit `http://localhost:8080/`
+1. Fork this repository, then clone your fork of the repo.
+2. Install dependencies using the `npm install` command.
+3. start the web server using the `npm start` command. The app will by served by default at <http://localhost:8080/>.
+4. Visit <http://localhost:8080/> in your browser
 
 ## Dependencies
 
 - Node 5.10.x or above
 - NPM 3.8.x or above
+- Body Parser
+- Bootstrap
+- Cookie Session
+- dotenv
+- EJS
+- Express
+- jQuery Timepicker
+- Knex
+- Mailgun
+- Moment
+- Morgan
+- Sass
+- PG
+
+## Screenshots

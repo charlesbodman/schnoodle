@@ -4,36 +4,24 @@ $(document).ready( function() {
   const countSlotIDs = JSON.parse($('#countSlotIDs').text());
   const arraySlotsData = JSON.parse($('#slotsData').text());
 
-  
+
   const arrayValueInOrderWithLabel = [];
   const arrayLabelInOrder = [];
 
   arraySlotsData.forEach(function (item) {
     arrayValueInOrderWithLabel.push(Number(countSlotIDs[item.id]));
-    arrayLabelInOrder.push(`${item.date} - ${item.start_time} / ${item.end_time}`);
+    arrayLabelInOrder.push(item.date + " " + item.start_time + "-" +item.end_time);
   });
-  
+
 
 
   console.log(arrayLabelInOrder);
   console.log(arrayValueInOrderWithLabel);
 
-  /*
-
-  countSlotIDs
-  {"7":"3","8":"7","9":"4"}
-
-  slotsData
-[{"id":7,"date":"2018-02-28","start_time":"02:00 AM","end_time":"04:00 AM","event_id":3},
-{"id":8,"date":"2018-02-27","start_time":"12:00 AM","end_time":"01:00 AM","event_id":3},
-{"id":9,"date":"2018-02-23","start_time":"05:00 AM","end_time":"06:00 AM","event_id":3}]
-
-  */
-
-
-
   //bar
   var ctxB = document.getElementById("barChart").getContext('2d');
+  ctxB.canvas.width = 300;
+
   var myBarChart = new Chart(ctxB, {
     type: 'bar',
     data: {
@@ -60,7 +48,7 @@ $(document).ready( function() {
         borderWidth: 1
       }]
     },
-    optionss: {
+    options: {
       scales: {
         yAxes: [{
           ticks: {
@@ -70,5 +58,6 @@ $(document).ready( function() {
       }
     }
   });
-
 });
+
+

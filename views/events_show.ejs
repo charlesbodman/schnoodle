@@ -38,7 +38,7 @@
         <div class="col-sm bg-dark"></div>
         <div class="col-8">
           <div class="row">
-            <h3 class="m-auto theme-dark"><%= title %>, an event created by <%= organizer_name %></h3>
+            <h3 class="m-auto theme-dark"><%= title %>, an event created by <%= organizerName %></h3>
           </div>
           <div class="row">
             <div class="col"></div>
@@ -52,34 +52,21 @@
               <%}%>
             </tr>
 
-<!-- <body>
-
- <header>
-   <h1><%= title %></h1>
-   <h2><%= organizerName %></h2>
-   <h3><%= organizerEmail %><h3></h3>
- </header> -->
-
- <h1 id="countSlotIDs"><%- JSON.stringify(countSlotIDs) %></h1>
- <h1 id="slotsData"><%- JSON.stringify(slots) %></h1>
-
-<table id= "slots">
-  <tr>
-    <th><h3>Name</h3></th>
-    <% for (let slot of slots) { %>
-      <th id="<%= slot.id %>"> <%= slot.date %><br><%= slot.start_time + "/" + slot.end_time %></br> Count: <%= countSlotIDs[slot.id] %> </th>
-    <%}%>
-  </tr>
-
+ <h1 id="countSlotIDs" hidden><%- JSON.stringify(countSlotIDs) %></h1>
+ <h1 id="slotsData" hidden><%- JSON.stringify(slots) %></h1>
 
           </table>
           <!-- this is the button for the modal -->
           <div class="row">
-          <input class="m-auto create-event btn btn-primary m-3" data-toggle="modal" type="submit" value="Submit!" name="event" data-target="#resultsModal" id="attendee-done">
+          <input class="m-auto create-event btn btn-primary m-3" type="submit" data-toggle="modal" value="Submit!" name="event" data-target="#resultsModal" id="attendee-done">
           </div>
           <div class="row mb-3">
           </div>
-
+          <div class="row">
+          <canvas id="barChart"></canvas>
+          </div>
+          <div class="row mb-3">
+          </div>
 
 
         </div>
@@ -119,9 +106,7 @@
       <script type="text/javascript" src="/scripts/app.js"></script>
 
 
-<canvas id="barChart"></canvas>
 
-<button id="attendee-done">Done</button>
 
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
