@@ -1,41 +1,36 @@
 $(document).ready( function() {
 
-
+  // Gets the data from the events:id page
   const countSlotIDs = JSON.parse($('#countSlotIDs').text());
   const arraySlotsData = JSON.parse($('#slotsData').text());
 
 
-  const arrayValueInOrderWithLabel = [];
+  const arrayValueInTheLabelOrder = [];
   const arrayLabelInOrder = [];
 
+  // Passes to arrays to feed the bar chart
   arraySlotsData.forEach(function (item) {
-    arrayValueInOrderWithLabel.push(Number(countSlotIDs[item.id]));
-    arrayLabelInOrder.push(item.date + " " + item.start_time + "-" +item.end_time);
+    arrayValueInTheLabelOrder.push(Number(countSlotIDs[item.id]));
+    arrayLabelInOrder.push(`${item.date} - ${item.start_time} / ${item.end_time}`);
   });
 
-
-
-  console.log(arrayLabelInOrder);
-  console.log(arrayValueInOrderWithLabel);
-
-  //bar
+  // bar chart
   var ctxB = document.getElementById("barChart").getContext('2d');
-  ctxB.canvas.width = 300;
-
+  Chart.defaults.global.scaleBeginAtZero = true;
   var myBarChart = new Chart(ctxB, {
     type: 'bar',
     data: {
       labels: arrayLabelInOrder,
       datasets: [{
-        label: '# of Votes',
-        data: arrayValueInOrderWithLabel,
+        label: 'Number of Votes',
+        data: arrayValueInTheLabelOrder,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(255, 99, 132)',
+          'rgba(54, 162, 235)',
+          'rgba(255, 206, 86)',
+          'rgba(75, 192, 192)',
+          'rgba(153, 102, 255)',
+          'rgba(255, 159, 64)'
         ],
         borderColor: [
           'rgba(255,99,132,1)',
@@ -49,15 +44,14 @@ $(document).ready( function() {
       }]
     },
     options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
-      }
+        scales: {
+            yAxes: [{
+                ticks: {
+                  scaleBeginAtZero : true
+                }
+            }]
+        }
     }
-  });
 });
 
-
+});

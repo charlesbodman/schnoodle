@@ -34,8 +34,6 @@ $(document).ready(function() {
 
   });
 
-  //count the number of row selected
-
   $('#attendee-done').on('click', (event) => {
 
     event.preventDefault();
@@ -49,6 +47,8 @@ $(document).ready(function() {
       }
 
     });
-  });
 
+    // Reload the page to update the chart bar
+    window.location.reload(true);
+  });
 });
