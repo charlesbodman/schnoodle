@@ -28,3 +28,11 @@ Schnoodle is a simplified clone of Doodle, a popular group-scheduling app. The a
 - PG
 
 ## Screenshots
+
+!["Schnoodle – Create Event Page"](https://github.com/shaun-mac/schoodle-midterm/blob/master/docs/Schnoodle_create_event.png?raw=true)
+
+!["Schnoodle – Modal displaying event URL"](https://github.com/shaun-mac/schoodle-midterm/blob/master/docs/Schnoodle_modal1.png?raw=true)
+
+!["Schnoodle – voting page"](https://github.com/shaun-mac/schoodle-midterm/blob/master/docs/Schnoodle_votepage.png?raw=true)
+
+!["Schnoodle – results view"](https://github.com/shaun-mac/schoodle-midterm/blob/master/docs/Schnoodle_resultsview.png?raw=true)
